@@ -1,6 +1,8 @@
 '''
 	Módulo Main
 '''
+import global_var
+
 import pygame
 import draw
 import update
@@ -58,6 +60,12 @@ def gameLoop():
 					running = False
 			elif event.type == QUIT:
 				running = False
+			
+			global_var.rel_mouse = pygame.mouse.get_rel()
+			global_var.pos_mouse = pygame.mouse.get_pos()
+			
+			if pygame.mouse.get_pressed()[1]:
+				global_var.cam[0] -= global_var.rel_mouse[0]
 				
 			g_ui.eventUI(event)
 			
