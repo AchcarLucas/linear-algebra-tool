@@ -19,6 +19,45 @@ class C_Axes:
 		self.V1 = vector.C_Vector(AXES_X_A, AXES_X_B, (255, 0, 0)) # X Vermelho
 		self.V2 = vector.C_Vector(AXES_Y_A, AXES_Y_B, (0, 255, 0)) # Y Verde
 		self.V3 = vector.C_Vector(AXES_Z_A, AXES_Z_B, (0, 0, 255)) # Z Azul
+		
+		color_x = (255,0,0)
+		color_y = (0,255,0)
+		color_z = (0,0,255)
+		
+		self.list_p = [
+				# Eixo X
+				point.C_Point(-2.5, 0.0, 0.0, visible=True, color=color_x),
+				point.C_Point(-2.0, 0.0, 0.0, visible=True, color=color_x),
+				point.C_Point(-1.5, 0.0, 0.0, visible=True, color=color_x),
+				point.C_Point(-1.0, 0.0, 0.0, visible=True, color=color_x),
+				point.C_Point(-0.5, 0.0, 0.0, visible=True, color=color_x),
+				point.C_Point(0.5, 0.0, 0.0, visible=True, color=color_x),
+				point.C_Point(1.0, 0.0, 0.0, visible=True, color=color_x),
+				point.C_Point(1.5, 0.0, 0.0, visible=True, color=color_x),
+				point.C_Point(2.0, 0.0, 0.0, visible=True, color=color_x),
+				
+				# Eixo Y
+				point.C_Point(0.0, -2.5, 0.0, visible=True, color=color_y),
+				point.C_Point(0.0, -2.0, 0.0, visible=True, color=color_y),
+				point.C_Point(0.0, -1.5, 0.0, visible=True, color=color_y),
+				point.C_Point(0.0, -1.0, 0.0, visible=True, color=color_y),
+				point.C_Point(0.0, -0.5, 0.0, visible=True, color=color_y),
+				point.C_Point(0.0, 0.5, 0.0, visible=True, color=color_y),
+				point.C_Point(0.0, 1.0, 0.0, visible=True, color=color_y),
+				point.C_Point(0.0, 1.5, 0.0, visible=True, color=color_y),
+				point.C_Point(0.0, 2.0, 0.0, visible=True, color=color_y),
+				
+				# Eixo Z
+				point.C_Point(0.0, 0.0, -2.5, visible=True, color=color_z),
+				point.C_Point(0.0, 0.0, -2.0, visible=True, color=color_z),
+				point.C_Point(0.0, 0.0, -1.5, visible=True, color=color_z),
+				point.C_Point(0.0, 0.0, -1.0, visible=True, color=color_z),
+				point.C_Point(0.0, 0.0, -0.5, visible=True, color=color_z),
+				point.C_Point(0.0, 0.0, 0.5, visible=True, color=color_z),
+				point.C_Point(0.0, 0.0, 1.0, visible=True, color=color_z),
+				point.C_Point(0.0, 0.0, 1.5, visible=True, color=color_z),
+				point.C_Point(0.0, 0.0, 2.0, visible=True, color=color_z)
+		]
 	
 	def renderAxes(self, c_draw):
 		self.V1.setScale([2.5, 2.5, 2.5])
@@ -28,3 +67,7 @@ class C_Axes:
 		self.V1.render(c_draw)
 		self.V2.render(c_draw)
 		self.V3.render(c_draw)
+		
+		for p in self.list_p:
+			p.render(c_draw)
+		

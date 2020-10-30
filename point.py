@@ -1,16 +1,44 @@
+import matrices
+import linear_transform as TL
 import global_var
 
 class C_Point:
-	def __init__(self, x=0, y=0, z=0, color=(0, 0, 0)):		
+	def __init__(self, x=0, y=0, z=0, color=(0, 0, 255), name='none', visible=False, scale=4.0):		
 		# O ponto é representado por uma matrix de 4 linhas e 1 coluna
-		self.m_point_modify = [[x], [y], [z], [1]]
+		self.m_point_modify = [[x], [y], [-z], [1]]
 		self.m_original_point = self.m_point_modify.copy()
-		
+		self.name = name
+		self.visible = visible
 		self.color = color
+		self.scale=scale
+		
+		# Se uma linha ou um vetor estiver utilizando o ponto, o mesmo não será exibido na tela
+		self.has_used = False
+		
+		self.c_TL = TL.C_LinearTransform()
 
 	def debugPoint(self):
 		print(f'Original Point {self.m_original_point}', end=' --- ')
 		print(f'Modify Point {self.m_point_modify}')
+		
+	def render(self, c_draw):
+		if(self.visible):
+			
+			if(not(self.has_used)):
+				MVP = matrices.C_Matrix.identity(4)
+
+				MVP = self.c_TL.rotateX(MVP, global_var.cam[0])
+				MVP = self.c_TL.rotateY(MVP, global_var.cam[1])
+				MVP = self.c_TL.rotateZ(MVP, global_var.cam[2])
+		
+				P = self.c_TL.perspectiveProjection(MVP, self)
+				
+				c_draw.pygame.draw.circle(c_draw.screen, self.color, [int(P.getScreenX() + c_draw.SCREEN_WIDTH / 2),  int(P.getScreenY() + c_draw.SCREEN_HEIGHT / 2)], int(self.scale), 0)
+			else:
+				c_draw.pygame.draw.circle(c_draw.screen, self.color, [int(self.getScreenX() + c_draw.SCREEN_WIDTH / 2),  int(self.getScreenY() + c_draw.SCREEN_HEIGHT / 2)], int(self.scale), 0)
+		
+		# Sempre desativa essa flag, se alguém ativar, significa que o ponto está sendo utilizado
+		self.has_used = False
 		
 	def getScreenX(self):
 		return self.m_point_modify[0][0]

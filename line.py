@@ -3,10 +3,11 @@ import matrices
 import global_var
 
 class C_Line:
-	def __init__(self, p_a, p_b, color=(0, 0, 0)):
+	def __init__(self, p_a, p_b, color=(0, 0, 0), name='none'):
 		self.p_a = p_a
 		self.p_b = p_b
 		self.color = color
+		self.name = name
 		
 		self.translateXYZ = [0.0, 0.0, 0.0]
 		self.scaleXYZ = [1.0, 1.0, 1.0]
@@ -27,6 +28,12 @@ class C_Line:
 		
 		P_A = self.c_TL.perspectiveProjection(MVP, self.p_a)
 		P_B = self.c_TL.perspectiveProjection(MVP, self.p_b)
+		
+		self.p_a.has_used = True
+		self.p_b.has_used = True
+		
+		self.p_a.m_point_modify = P_A.m_point_modify
+		self.p_b.m_point_modify = P_B.m_point_modify
 	
 		c_draw.pygame.draw.line(c_draw.screen, self.color, 
 						(P_A.getScreenX() + c_draw.SCREEN_WIDTH / 2, P_A.getScreenY() + c_draw.SCREEN_HEIGHT / 2), 

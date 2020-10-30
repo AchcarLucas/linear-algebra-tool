@@ -2,6 +2,7 @@
 	Módulo User Interface
 '''
 
+import global_var
 import pygame_gui
 
 from collections import deque
@@ -26,6 +27,36 @@ class Options:
         self.resolution = (width, height)
         self.fullscreen = False
 
+class UIMessageWindow(UIWindow):
+	def __init__(self, rect, ui_manager, c_draw, c_update, c_status, options, title, message):
+		super().__init__(	rect, 
+						ui_manager,
+						window_display_title=title,
+						object_id='#ui_message_window',
+						resizable=False)
+						
+		self.c_draw = c_draw
+		self.c_update = c_update
+		self.c_status = c_status
+		
+		self.options = Options(c_draw.SCREEN_WIDTH, c_draw.SCREEN_HEIGHT)
+		
+			
+		# Label Message
+		self.label = UILabel(c_draw.pygame.Rect(
+												(20, 10),
+												(450, 20)),
+							message,
+							self.ui_manager,
+							object_id='#label_message',
+							container=self)
+			
+	def update(self, time_delta):
+		super().update(time_delta)
+		
+	def event(self, event):
+		return True
+		
 class UIScaleWindow(UIWindow):
 	def __init__(self, rect, ui_manager, c_draw, c_update, c_status, options):
 		super().__init__(	rect, 
@@ -874,35 +905,21 @@ class UIToolbarWindow(UIWindow):
 			
 		y += 20
 		point_list_height = 100
+
+		self.text_point_list = []
 										
 		# Cria a lista contendo todos os pontos
 		self.point_list = UISelectionList(
 								c_draw.pygame.Rect(
 												(20, y),
 												(180, point_list_height)),
-								[
-									('O = (0, 0, 0)',  '0'),
-									('A = (10, 10, 0)',  '1'),
-									('B = (-1, -1, 0)',  '2')
-								],
+								self.text_point_list,
 								self.ui_manager,
 								object_id='#select_list_point',
-								allow_multi_select=True,
-								allow_double_clicks=True,
+								allow_multi_select=False,
+								allow_double_clicks=False,
 								container=self)
 		y += point_list_height + 10
-		
-		# Cria o botão escala
-		self.remove_selected_button = UIButton(
-								c_draw.pygame.Rect(
-												(15, y),
-												(190, 25)),
-								'Remover Selecionados',
-								self.ui_manager,
-								object_id='#remove_selected_button',
-								container=self)
-		
-		y += 30
 		
 		# Cria a label 'Lista de Objetos'
 		self.fps_counter = UILabel(c_draw.pygame.Rect(
@@ -916,19 +933,18 @@ class UIToolbarWindow(UIWindow):
 		y += 20
 		obj_list_height = 100
 		
+		self.text_obj_list = []
+		
 		# Cria a lista contendo vetores e linhas denominados objetos
 		self.obj_list = UISelectionList(
 								c_draw.pygame.Rect(
 												(20, y),
 												(180, obj_list_height)),
-								[
-									('v1 = Vetor(A, B)', '0'),
-									('v2 = Vetor(O, B)', '1'),
-									('v3 = Linha(A, B)', '2')
-								],
+								self.text_obj_list,
 								self.ui_manager,
 								object_id='#select_list_obj',
-								allow_multi_select=False,
+								allow_multi_select=True,
+								allow_double_clicks=True,
 								container=self)	
 		self.obj_list.disable()
 
@@ -937,11 +953,23 @@ class UIToolbarWindow(UIWindow):
 		# Cria o botão resetar transformações lineares
 		self.load_file_point = UIButton(
 								c_draw.pygame.Rect(
-												(45, y),
-												(130, 25)),
-								'Carregar Pontos',
+												(10, y),
+												(200, 25)),
+								'Importar Pontos/Objetos',
 								self.ui_manager,
-								object_id='#load_file_point',
+								object_id='#import_file',
+								container=self)
+		
+		y += 30
+		
+		# Cria o botão resetar transformações lineares
+		self.load_file_point = UIButton(
+								c_draw.pygame.Rect(
+												(10, y),
+												(200, 25)),
+								'Exportar Pontos/Objetos',
+								self.ui_manager,
+								object_id='#export_file',
 								container=self)
 					
 	def update(self, time_delta):
@@ -965,7 +993,47 @@ class UIToolbarWindow(UIWindow):
 					self.ui_translate_window = self.createTranslateWindow()
 				if event.ui_element == self.scale_button:
 					self.ui_translate_window = self.createScaleWindow()
+				if event.ui_element == self.apply_button:
+					self.updateCommand()
+					self.entry_cmd.set_text('')
+			if event.user_type == pygame_gui.UI_TEXT_ENTRY_FINISHED:
+				if event.ui_element == self.entry_cmd:
+					self.updateCommand()
+					self.entry_cmd.set_text('')
 					
+	
+	def updateCommand(self):
+		rtn, name = self.c_draw.updateCommand(self.entry_cmd.get_text())
+		if rtn == global_var.RTN.ERROR_CMD:
+			self.createMessageWindow('Erro', 'O comando digitado não existe')
+		elif rtn == global_var.RTN.INVALID_CMD:
+			self.createMessageWindow('Erro', 'O comando digitado é inválido')
+		elif rtn == global_var.RTN.POINT_DOES_EXIST:
+			self.createMessageWindow('Erro', 'Um ou mais pontos não existem')
+		elif rtn == global_var.RTN.NAME_ALREADY:
+			self.createMessageWindow('Erro', 'O nome utilizado já está em uso')
+		elif rtn == global_var.RTN.POINT_IS_USED:
+			self.createMessageWindow('Erro [Remover Ponto]', 'O ponto está sendo usado')
+		elif rtn == global_var.RTN.CMD_FAILED:
+			self.createMessageWindow('Erro', 'Existem erros no comando digitado')
+		elif rtn == global_var.RTN.SUCCESS_POINT:
+			self.text_point_list.append((self.entry_cmd.get_text().replace(' ', ''), name))
+			self.point_list.set_item_list(self.text_point_list)
+		elif rtn == global_var.RTN.SUCCESS_VECTOR or rtn == global_var.RTN.SUCCESS_LINE:
+			self.text_obj_list.append((self.entry_cmd.get_text().replace(' ', ''), name))
+			self.obj_list.set_item_list(self.text_obj_list)
+		elif rtn == global_var.RTN.POINT_REMOVED:
+			for p in self.text_point_list:
+				if p[1] == name:
+					self.text_point_list.remove(p)
+					break
+			self.point_list.set_item_list(self.text_point_list)
+		elif rtn == global_var.RTN.LINE_REMOVED or rtn == global_var.RTN.VECTOR_REMOVED:
+			for p in self.text_obj_list:
+				if p[1] == name:
+					self.text_obj_list.remove(p)
+					break
+			self.obj_list.set_item_list(self.text_obj_list)
 	
 	def createRotateWindow(self):
 		return UIRotateWindow(	self.c_draw.pygame.Rect((self.options.resolution[0]  / 2 - 150,  self.options.resolution[1]  / 2 - 150), 
@@ -993,6 +1061,17 @@ class UIToolbarWindow(UIWindow):
 								self.c_update,
 								self.c_status,
 								self.options)
+								
+	def createMessageWindow(self, title, message):
+		return UIMessageWindow(	self.c_draw.pygame.Rect((self.options.resolution[0]  / 2 - 150,  self.options.resolution[1]  / 2 - 150), 
+								(450, 30)), 
+								self.ui_manager, 
+								self.c_draw, 
+								self.c_update,
+								self.c_status,
+								self.options,
+								title,
+								message)
 								
 # Classe Principal da Interface de Usuário
 class GeneralUI:
