@@ -41,6 +41,7 @@ class C_Point:
 				
 			c_draw.pygame.draw.circle(c_draw.screen, color, [int(P.getScreenX() + c_draw.SCREEN_WIDTH / 2),  int(P.getScreenY() + c_draw.SCREEN_HEIGHT / 2)], int(self.scale), 0)
 
+			# Só exibe a posição atual do ponto se não estiver sendo usado
 			if(not self.has_used):
 				if(self.has_text and self.text != None):
 					coordenateText = global_var.myfont.render(self.text, 0, (0, 0, 0, 0))

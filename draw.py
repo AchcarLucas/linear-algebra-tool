@@ -35,17 +35,11 @@ class C_Draw:
 						['L1', line.C_Line(self.point_list[0][1], self.point_list[2][1], name='L1', has_text=True)]
 					]
 		
-		# Remover essa linha
-		self.rot = 0
 		
 	def gameDraw(self):
 		self.screen.fill(self.pygame.Color('#FFFFFF'))
 		
 		self.c_render.render()
-		
-		self.g_ui.drawUI()
-		
-		self.rot += 0.1
 		
 		for p in self.point_list:
 			p[1].render(self)
@@ -53,10 +47,10 @@ class C_Draw:
 		for l in self.line_list:
 			l[1].render(self)
 		
-		# Remover essa linha
-		self.vector_list[0][1].setRotate([self.rot, 0, 0])
 		for v in self.vector_list:
 			v[1].render(self)
+		
+		self.g_ui.drawUI()
 		
 		self.pygame.display.update()
 		

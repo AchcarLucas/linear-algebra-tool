@@ -16,9 +16,9 @@ class C_Axes:
 		AXES_Z_A = point.C_Point(0.0, 0.0, 1.0)
 		AXES_Z_B = point.C_Point(0.0, 0.0, -1.0)
 
-		self.V1 = vector.C_Vector(AXES_X_A, AXES_X_B, (255, 0, 0)) # X Vermelho
-		self.V2 = vector.C_Vector(AXES_Y_A, AXES_Y_B, (0, 255, 0)) # Y Verde
-		self.V3 = vector.C_Vector(AXES_Z_A, AXES_Z_B, (0, 0, 255)) # Z Azul
+		self.V1 = vector.C_Vector(AXES_X_A, AXES_X_B, (255, 0, 0), has_text=True, text='X') # X Vermelho
+		self.V2 = vector.C_Vector(AXES_Y_A, AXES_Y_B, (0, 255, 0), has_text=True, text='Y') # Y Verde
+		self.V3 = vector.C_Vector(AXES_Z_A, AXES_Z_B, (0, 0, 255), has_text=True, text='Z') # Z Azul
 		
 		color_x = (255,0,0)
 		color_y = (0,255,0)

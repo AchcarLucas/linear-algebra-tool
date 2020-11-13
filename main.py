@@ -71,8 +71,8 @@ def gameLoop():
 			global_var.pos_mouse = pygame.mouse.get_pos()
 			
 			if pygame.mouse.get_pressed()[1]:
-				global_var.cam[0] -= global_var.rel_mouse[0]
-				global_var.cam[2] -= global_var.rel_mouse[1]
+				global_var.cam[1] -= global_var.rel_mouse[0]
+				global_var.cam[0] -= global_var.rel_mouse[1]
 				
 			g_ui.eventUI(event)
 			

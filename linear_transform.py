@@ -18,13 +18,13 @@ class C_LinearTransform:
 			Matrix de rotação (Eixo X)
 			T(x, y, z, w) M(4,4) * M(4,1) -> R^4
 			
-			T_z(x, y, z, w) = (x*cos(Theta) - y*sin(Theta), x*sin(Theta) + y*cos(Theta), z, 0)
+			T_z(x, y, z, w) = (x, y*cos(Theta) - z*sin(Theta), y*sin(Theta) + z*cos(Theta), 0)
 			
 			
-						| cos(Theta)	sen(Theta)	0		0 |		|	x	|
-			T(x, y, z, w) = 	| -sin(Theta)	cos(Theta)		0 		0 | 	* 	|	y	|
-						| 0			0			1 		0 |		|	z	|
-						| 0			0			0 		1 |		|	0	|
+						| 1				0			0	  	0 |		|	x	|
+			T(x, y, z, w) = 	| 0			cos(Theta)		-sen(Theta) 	0 | 	* 	|	y	|
+						| 0			sin(Theta)		cos(Theta)		0 |		|	z	|
+						| 0			0				0 		1 |		|	0	|
 						
 						
 			Entrada (Input): Classe C_Ponto e o ângulo para transformar
@@ -38,14 +38,14 @@ class C_LinearTransform:
 		cos_theta = np.cos(theta)
 		sin_theta = np.sin(theta)
 		
-		# A matrix de rotação X é uma matrix de 4 linhas e 4 colunas
-		t_rotate_x = [	[ cos_theta, 	sin_theta, 	0, 	0], 
-					[-sin_theta, 	cos_theta, 	0,	0], 
-					[0, 	0,	1,	0],
-					[0, 	0, 	0,	1]]
+		# A matrix de rotação Z é uma matrix de 4 linhas e 4 colunas
+		t_rotate_z = [	[1, 			0, 			0,			0], 
+					[0, 			cos_theta, 	-sin_theta,	0], 
+					[0, 			sin_theta, 		cos_theta, 	0],
+					[0, 			0, 			0,			1]]
 		
 		# Faz a transformação linear
-		return mtc.C_Matrix.mul(t_rotate_x, T_M)
+		return mtc.C_Matrix.mul(t_rotate_z, T_M)
 		
 	def rotateY(self, T_M, angle_degree):
 		'''
@@ -86,13 +86,13 @@ class C_LinearTransform:
 			Matrix de rotação (Eixo Z)
 			T(x, y, z, w) M(4,4) * M(4,1) -> R^4
 			
-			T_z(x, y, z, w) = (x, y*cos(Theta) - z*sin(Theta), y*sin(Theta) + z*cos(Theta), 0)
+			T_z(x, y, z, w) = (x*cos(Theta) - y*sin(Theta), x*sin(Theta) + y*cos(Theta), z, 0)
 			
 			
-						| 1				0			0	  	0 |		|	x	|
-			T(x, y, z, w) = 	| 0			cos(Theta)		-sen(Theta) 	0 | 	* 	|	y	|
-						| 0			sin(Theta)		cos(Theta)		0 |		|	z	|
-						| 0			0				0 		1 |		|	0	|
+						| cos(Theta)	sen(Theta)	0		0 |		|	x	|
+			T(x, y, z, w) = 	| -sin(Theta)	cos(Theta)		0 		0 | 	* 	|	y	|
+						| 0			0			1 		0 |		|	z	|
+						| 0			0			0 		1 |		|	0	|
 						
 						
 			Entrada (Input): Classe C_Ponto e o ângulo para transformar
@@ -106,14 +106,14 @@ class C_LinearTransform:
 		cos_theta = np.cos(theta)
 		sin_theta = np.sin(theta)
 		
-		# A matrix de rotação Z é uma matrix de 4 linhas e 4 colunas
-		t_rotate_z = [	[1, 			0, 			0,			0], 
-					[0, 			cos_theta, 	-sin_theta,	0], 
-					[0, 			sin_theta, 		cos_theta, 	0],
-					[0, 			0, 			0,			1]]
+		# A matrix de rotação X é uma matrix de 4 linhas e 4 colunas
+		t_rotate_x = [	[ cos_theta, 	sin_theta, 	0, 	0], 
+					[-sin_theta, 	cos_theta, 	0,	0], 
+					[0, 	0,	1,	0],
+					[0, 	0, 	0,	1]]
 		
 		# Faz a transformação linear
-		return mtc.C_Matrix.mul(t_rotate_z, T_M)
+		return mtc.C_Matrix.mul(t_rotate_x, T_M)
 	
 	def scaleXYZ(self, T_M, scale_x=1.0, scale_y=1.0, scale_z=1.0):
 		'''

@@ -38,7 +38,16 @@ class C_Update:
 		with open(file_name, 'rb') as input:
 			return pickle.load(input)
 		
-		
+	def setRotateSelected(self, selected, rot):
+		for s in selected:
+			for l in self.c_draw.line_list:
+				if(s == l[0]):
+					l[1].setRotate(rot)
+					
+			for v in self.c_draw.vector_list:
+				if(s == v[0]):
+					v[1].setRotate(rot)
+	
 	def updateCommand(self, text):
 		try:
 			text = text.replace(' ', '')

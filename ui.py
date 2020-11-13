@@ -2,6 +2,8 @@
 	Módulo User Interface
 '''
 
+import numpy as np
+
 import global_var
 import pygame_gui
 
@@ -485,23 +487,13 @@ class UIRotateWindow(UIWindow):
 							
 							
 		y += 30
-												
-		# Cria o botão para aplicar a rotação no eixo X
-		self.apply_axes_x_rotate_button = UIButton(
-								c_draw.pygame.Rect(
-												(30, y),
-												(80, 25)),
-								'Aplicar',
-								self.ui_manager,
-								object_id='#apply_axes_x_rotate_button',
-								container=self)
-		
+				
 		
 		# Cria o botão para resetar os valores adicionados
 		self.clear_axes_x_rotate_button = UIButton(
 								c_draw.pygame.Rect(
-												(150, y),
-												(80, 25)),
+												(45, y),
+												(200, 25)),
 								'Resetar',
 								self.ui_manager,
 								object_id='#reset_axes_x_rotate_clear',
@@ -517,7 +509,6 @@ class UIRotateWindow(UIWindow):
 		self.UIListRotateX.append(self.label_plus_pi_x)
 		self.UIListRotateX.append(self.x_angle_label)
 		self.UIListRotateX.append(self.x_angle_entry)
-		self.UIListRotateX.append(self.apply_axes_x_rotate_button)
 		self.UIListRotateX.append(self.x_angle_entry)
 		self.UIListRotateX.append(self.clear_axes_x_rotate_button)
 												
@@ -591,22 +582,13 @@ class UIRotateWindow(UIWindow):
 							
 							
 		y += 30
-												
-		# Cria o botão para aplicar a rotação no eixo Y
-		self.apply_axes_y_rotate_button = UIButton(
-								c_draw.pygame.Rect(
-												(30, y),
-												(80, 25)),
-								'Aplicar',
-								self.ui_manager,
-								object_id='#apply_axes_y_rotate_button',
-								container=self)
+
 		
 		# Cria o botão para resetar os valores adicionados
 		self.clear_axes_y_rotate_button = UIButton(
 								c_draw.pygame.Rect(
-												(150, y),
-												(80, 25)),
+												(45, y),
+												(200, 25)),
 								'Resetar',
 								self.ui_manager,
 								object_id='#reset_axes_y_rotate_clear',
@@ -620,7 +602,6 @@ class UIRotateWindow(UIWindow):
 		self.UIListRotateX.append(self.label_plus_pi_y)
 		self.UIListRotateX.append(self.y_angle_label)
 		self.UIListRotateX.append(self.y_angle_entry)
-		self.UIListRotateX.append(self.apply_axes_y_rotate_button)
 		self.UIListRotateX.append(self.y_angle_entry)
 		self.UIListRotateX.append(self.clear_axes_y_rotate_button)
 												
@@ -694,22 +675,12 @@ class UIRotateWindow(UIWindow):
 							
 							
 		y += 30
-												
-		# Cria o botão para aplicar a rotação no eixo Z
-		self.apply_axes_z_rotate_button = UIButton(
-								c_draw.pygame.Rect(
-												(30, y),
-												(80, 25)),
-								'Aplicar',
-								self.ui_manager,
-								object_id='#apply_axes_z_rotate_button',
-								container=self)
-		
+
 		# Cria o botão para resetar os valores adicionados
 		self.clear_axes_z_rotate_button = UIButton(
 								c_draw.pygame.Rect(
-												(150, y),
-												(80, 25)),
+												(45, y),
+												(200, 25)),
 								'Resetar',
 								self.ui_manager,
 								object_id='#reset_axes_z_rotate_clear',
@@ -723,7 +694,6 @@ class UIRotateWindow(UIWindow):
 		self.UIListRotateX.append(self.label_plus_pi_z)
 		self.UIListRotateX.append(self.z_angle_label)
 		self.UIListRotateX.append(self.z_angle_entry)
-		self.UIListRotateX.append(self.apply_axes_z_rotate_button)
 		self.UIListRotateX.append(self.z_angle_entry)
 		self.UIListRotateX.append(self.clear_axes_z_rotate_button)
 
@@ -764,6 +734,43 @@ class UIRotateWindow(UIWindow):
 				if event.ui_element == self.random_rotate_button_inactived:
 					self.statusAutomaticRotate(False)
 				
+				if event.ui_element == self.clear_axes_x_rotate_button:
+					self.angle_x_slider.set_current_value(50.0)
+					self.x_angle_entry.set_text('0.0')
+				if event.ui_element == self.clear_axes_y_rotate_button:
+					self.angle_y_slider.set_current_value(50.0)
+					self.y_angle_entry.set_text('0.0')
+				if event.ui_element == self.clear_axes_z_rotate_button:
+					self.angle_z_slider.set_current_value(50.0)
+					self.z_angle_entry.set_text('0.0')
+					
+				if event.ui_element == self.clear_axes_x_rotate_button or event.ui_element == self.clear_axes_y_rotate_button or event.ui_element == self.clear_axes_z_rotate_button:
+					self.applyRotate()
+
+			if event.user_type == pygame_gui.UI_HORIZONTAL_SLIDER_MOVED:
+				if event.ui_element == self.angle_x_slider:
+					angle_x = self.mapFromTo(float(self.angle_x_slider.get_current_value()), 0.0, 100.0, -360.0, 360.0)
+					self.x_angle_entry.set_text(f'{angle_x:0.1f}')
+					self.applyRotate()
+				if event.ui_element == self.angle_y_slider:
+					angle_y = self.mapFromTo(float(self.angle_y_slider.get_current_value()), 0.0, 100.0, -360.0, 360.0)
+					self.y_angle_entry.set_text(f'{angle_y:0.1f}')
+					self.applyRotate()
+				if event.ui_element == self.angle_z_slider:
+					angle_z = self.mapFromTo(float(self.angle_z_slider.get_current_value()), 0.0, 100.0, -360.0, 360.0)
+					self.z_angle_entry.set_text(f'{angle_z:0.1f}')
+					self.applyRotate()
+			
+	def mapFromTo(self, x,a,b,c,d):
+		y=(x-a)/(b-a)*(d-c)+c
+		return y
+		
+	def applyRotate(self):
+		angle_x = self.mapFromTo(float(self.angle_x_slider.get_current_value()), 0.0, 100.0, -360.0, 360.0)
+		angle_y = self.mapFromTo(float(self.angle_y_slider.get_current_value()), 0.0, 100.0, -360.0, 360.0)
+		angle_z = self.mapFromTo(float(self.angle_z_slider.get_current_value()), 0.0, 100.0, -360.0, 360.0)
+		
+		self.c_update.setRotateSelected(self.c_status.obj_selected, [angle_x, angle_y, angle_z])
 	
 	def statusAutomaticRotate(self, status):
 		if(status):
@@ -905,15 +912,13 @@ class UIToolbarWindow(UIWindow):
 			
 		y += 20
 		point_list_height = 100
-
-		self.text_point_list = []
 										
 		# Cria a lista contendo todos os pontos
 		self.point_list = UISelectionList(
 								c_draw.pygame.Rect(
 												(20, y),
 												(180, point_list_height)),
-								self.text_point_list,
+								self.c_status.text_point_list,
 								self.ui_manager,
 								object_id='#select_list_point',
 								allow_multi_select=False,
@@ -935,14 +940,12 @@ class UIToolbarWindow(UIWindow):
 		y += 20
 		obj_list_height = 100
 		
-		self.text_obj_list = []
-		
 		# Cria a lista contendo vetores e linhas denominados objetos
 		self.obj_list = UISelectionList(
 								c_draw.pygame.Rect(
 												(20, y),
 												(180, obj_list_height)),
-								self.text_obj_list,
+								self.c_status.text_obj_list,
 								self.ui_manager,
 								object_id='#select_list_obj',
 								allow_multi_select=True,
@@ -999,6 +1002,15 @@ class UIToolbarWindow(UIWindow):
 				if event.ui_element == self.apply_button:
 					self.updateCommand()
 					self.entry_cmd.set_text('')
+					
+			if(event.user_type == pygame_gui.UI_SELECTION_LIST_NEW_SELECTION):
+				if event.ui_element == self.obj_list:
+					self.c_status.obj_selected.clear()
+					for v in  self.obj_list.get_multi_selection():
+						a, b = v.replace(' ', '').split('=')
+						self.c_status.obj_selected.append(a)
+					print(self.c_status.obj_selected)
+					
 			if event.user_type == pygame_gui.UI_TEXT_ENTRY_FINISHED:
 				if event.ui_element == self.entry_cmd:
 					self.updateCommand()
@@ -1029,20 +1041,20 @@ class UIToolbarWindow(UIWindow):
 		
 			
 	def updateLists(self):
-		self.text_obj_list.clear()
+		self.c_status.text_obj_list.clear()
 		for p in self.c_draw.point_list:
-			self.text_obj_list.append((f'{p[1].name} = P({p[1].getOriginalScreenX():0.1f}, {p[1].getOriginalScreenY():0.1f}, {p[1].getOriginalScreenZ():0.1f})', p[1].name))
+			self.c_status.text_obj_list.append((f'{p[1].name} = P({p[1].getOriginalScreenX():0.1f}, {p[1].getOriginalScreenY():0.1f}, {p[1].getOriginalScreenZ():0.1f})', p[1].name))
 		
-		self.point_list.set_item_list(self.text_obj_list)
+		self.point_list.set_item_list(self.c_status.text_obj_list)
 		
-		self.text_obj_list.clear()
+		self.c_status.text_obj_list.clear()
 		for p in self.c_draw.vector_list:
-			self.text_obj_list.append((f'{p[1].name} = V({p[1].p_b.name}, {p[1].p_a.name})', p[1].name))
+			self.c_status.text_obj_list.append((f'{p[1].name} = V({p[1].p_b.name}, {p[1].p_a.name})', p[1].name))
 		
 		for p in self.c_draw.line_list:
-			self.text_obj_list.append((f'{p[1].name} = L({p[1].p_b.name}, {p[1].p_a.name})', p[1].name))
+			self.c_status.text_obj_list.append((f'{p[1].name} = L({p[1].p_b.name}, {p[1].p_a.name})', p[1].name))
 		
-		self.obj_list.set_item_list(self.text_obj_list)
+		self.obj_list.set_item_list(self.c_status.text_obj_list)
 		
 		
 	

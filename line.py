@@ -29,14 +29,14 @@ class C_Line:
 		
 		MVP = self.c_TL.translateXYZ(MVP, self.translateXYZ[0], self.translateXYZ[1], self.translateXYZ[2])
 		
-		# Informações antes de mover a camera 
+		# Pega as posições atuais dos pontos A e B antes de mover a camera 
 		T_P_A = self.c_TL.perspectiveProjection(MVP, self.p_a)
 		T_P_B = self.c_TL.perspectiveProjection(MVP, self.p_b)
 		
 		self.p_a.m_point_modify = T_P_A.m_original_point
 		self.p_b.m_point_modify = T_P_B.m_original_point
 		
-		# Move a camera
+		# Faz mover a camera
 		MVP = self.c_TL.rotateX(MVP, global_var.cam[0])
 		MVP = self.c_TL.rotateY(MVP, global_var.cam[1])
 		MVP = self.c_TL.rotateZ(MVP, global_var.cam[2])

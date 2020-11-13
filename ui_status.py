@@ -9,3 +9,6 @@
 class UIStatus:
     def __init__(self):
 	    self.automatic_rotate = False
+	    self.text_point_list = []
+	    self.text_obj_list = []
+	    self.obj_selected = []
