@@ -102,23 +102,12 @@ class UIScaleWindow(UIWindow):
 									
 									
 		y += 30
-												
-		# Cria o botão para aplicar a escala no eixo X
-		self.apply_axes_x_scale_button = UIButton(
-								c_draw.pygame.Rect(
-												(30, y),
-												(80, 25)),
-								'Aplicar',
-								self.ui_manager,
-								object_id='#apply_axes_scale_x_button',
-								container=self)
-		
-		
+										
 		# Cria o botão para resetar os valores adicionados
 		self.clear_axes_x_scale_button = UIButton(
 								c_draw.pygame.Rect(
-												(150, y),
-												(80, 25)),
+												(45, y),
+												(200, 25)),
 								'Resetar',
 								self.ui_manager,
 								object_id='#reset_axes_scale_x_clear',
@@ -151,23 +140,13 @@ class UIScaleWindow(UIWindow):
 									
 									
 		y += 30
-												
-		# Cria o botão para aplicar a escala no eixo Y
-		self.apply_axes_y_scale_button = UIButton(
-								c_draw.pygame.Rect(
-												(30, y),
-												(80, 25)),
-								'Aplicar',
-								self.ui_manager,
-								object_id='#apply_axes_scale_y_button',
-								container=self)
-		
-		
+											
+
 		# Cria o botão para resetar os valores adicionados
 		self.clear_axes_y_scale_button = UIButton(
 								c_draw.pygame.Rect(
-												(150, y),
-												(80, 25)),
+												(45, y),
+												(200, 25)),
 								'Resetar',
 								self.ui_manager,
 								object_id='#reset_axes_scale_y_clear',
@@ -201,33 +180,52 @@ class UIScaleWindow(UIWindow):
 									
 									
 		y += 30
-												
-		# Cria o botão para aplicar a escala no eixo Z
-		self.apply_axes_z_scale_button = UIButton(
-								c_draw.pygame.Rect(
-												(30, y),
-												(80, 25)),
-								'Aplicar',
-								self.ui_manager,
-								object_id='#apply_axes_scale_z_button',
-								container=self)
-		
-		
+											
 		# Cria o botão para resetar os valores adicionados
 		self.clear_axes_z_scale_button = UIButton(
 								c_draw.pygame.Rect(
-												(150, y),
-												(80, 25)),
+												(45, y),
+												(200, 25)),
 								'Resetar',
 								self.ui_manager,
 								object_id='#reset_axes_scale_z_clear',
+								container=self)
+		
+		y += 30
+		
+				# Cria o botão para aplicar a escala no eixo Z
+		self.apply_axes_scale_button = UIButton(
+								c_draw.pygame.Rect(
+												(45, y),
+												(200, 25)),
+								'Aplicar',
+								self.ui_manager,
+								object_id='#apply_axes_scale_z_button',
 								container=self)
 						
 	def update(self, time_delta):
 		super().update(time_delta)
 		
 	def event(self, event):
-		return True
+		if event.type == self.c_draw.pygame.USEREVENT:
+			if event.user_type == pygame_gui.UI_BUTTON_PRESSED:
+
+				if event.ui_element == self.clear_axes_x_scale_button:
+					self.x_entry_scale.set_text('1.0')
+				if event.ui_element == self.clear_axes_y_scale_button:
+					self.y_entry_scale.set_text('1.0')
+				if event.ui_element == self.clear_axes_z_scale_button:
+					self.z_entry_scale.set_text('1.0')
+					
+				if event.ui_element == self.apply_axes_scale_button:
+					self.applyScale()
+					
+	def applyScale(self):
+		t_x = float(self.x_entry_scale.get_text())
+		t_y = float(self.y_entry_scale.get_text())
+		t_z = float(self.z_entry_scale.get_text())
+		
+		self.c_update.setScaleSelected(self.c_status.obj_selected, [t_x, t_y, t_z])
 		
 class UITranslateWindow(UIWindow):
 	def __init__(self, rect, ui_manager, c_draw, c_update, c_status, options):
@@ -360,7 +358,7 @@ class UITranslateWindow(UIWindow):
 								object_id='#reset_axes_trans_z_clear',
 								container=self)
 						
-		y += 45
+		y += 30
 		
 		# Cria o botão para aplicar a translação no eixo Z
 		self.apply_axes_trans_button = UIButton(
@@ -1084,7 +1082,7 @@ class UIToolbarWindow(UIWindow):
 								
 	def createScaleWindow(self):
 		return UIScaleWindow(	self.c_draw.pygame.Rect((self.options.resolution[0]  / 2 - 150,  self.options.resolution[1]  / 2 - 150), 
-								(300, 280)), 
+								(300, 320)), 
 								self.ui_manager, 
 								self.c_draw, 
 								self.c_update,

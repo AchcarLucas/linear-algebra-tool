@@ -62,11 +62,11 @@ class C_Update:
 		for s in selected:
 			for l in self.c_draw.line_list:
 				if(s == l[0]):
-					l[1].setTranslate(scale)
+					l[1].setScale(scale)
 					
 			for v in self.c_draw.vector_list:
 				if(s == v[0]):
-					v[1].setTranslate(scale)
+					v[1].setScale(scale)
 	
 	def updateCommand(self, text):
 		try:

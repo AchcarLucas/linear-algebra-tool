@@ -79,5 +79,5 @@ class C_Line:
 	def setTranslate(self, translate=[0.0, 0.0, 0.0]):
 		self.translateXYZ = translate
 		
-	def setScale(self, scale=[0.0, 0.0, 0.0]):
+	def setScale(self, scale=[1.0, 1.0, 1.0]):
 		self.scaleXYZ = scale
