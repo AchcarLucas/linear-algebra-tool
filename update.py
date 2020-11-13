@@ -48,6 +48,26 @@ class C_Update:
 				if(s == v[0]):
 					v[1].setRotate(rot)
 	
+	def setTranslateSelected(self, selected, trans):
+		for s in selected:
+			for l in self.c_draw.line_list:
+				if(s == l[0]):
+					l[1].setTranslate(trans)
+					
+			for v in self.c_draw.vector_list:
+				if(s == v[0]):
+					v[1].setTranslate(trans)
+					
+	def setScaleSelected(self, selected, scale):
+		for s in selected:
+			for l in self.c_draw.line_list:
+				if(s == l[0]):
+					l[1].setTranslate(scale)
+					
+			for v in self.c_draw.vector_list:
+				if(s == v[0]):
+					v[1].setTranslate(scale)
+	
 	def updateCommand(self, text):
 		try:
 			text = text.replace(' ', '')

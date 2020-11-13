@@ -271,23 +271,13 @@ class UITranslateWindow(UIWindow):
 									
 									
 		y += 30
-												
-		# Cria o botão para aplicar a translação no eixo X
-		self.apply_axes_x_trans_button = UIButton(
-								c_draw.pygame.Rect(
-												(30, y),
-												(80, 25)),
-								'Aplicar',
-								self.ui_manager,
-								object_id='#apply_axes_trans_x_button',
-								container=self)
-		
+											
 		
 		# Cria o botão para resetar os valores adicionados
 		self.clear_axes_x_trans_button = UIButton(
 								c_draw.pygame.Rect(
-												(150, y),
-												(80, 25)),
+												(45, y),
+												(200, 25)),
 								'Resetar',
 								self.ui_manager,
 								object_id='#reset_axes_trans_x_clear',
@@ -320,23 +310,12 @@ class UITranslateWindow(UIWindow):
 									
 									
 		y += 30
-												
-		# Cria o botão para aplicar a translação no eixo Y
-		self.apply_axes_y_trans_button = UIButton(
-								c_draw.pygame.Rect(
-												(30, y),
-												(80, 25)),
-								'Aplicar',
-								self.ui_manager,
-								object_id='#apply_axes_trans_y_button',
-								container=self)
-		
-		
+
 		# Cria o botão para resetar os valores adicionados
 		self.clear_axes_y_trans_button = UIButton(
 								c_draw.pygame.Rect(
-												(150, y),
-												(80, 25)),
+												(45, y),
+												(200, 25)),
 								'Resetar',
 								self.ui_manager,
 								object_id='#reset_axes_trans_y_clear',
@@ -371,32 +350,51 @@ class UITranslateWindow(UIWindow):
 									
 		y += 30
 												
-		# Cria o botão para aplicar a translação no eixo Z
-		self.apply_axes_z_trans_button = UIButton(
-								c_draw.pygame.Rect(
-												(30, y),
-												(80, 25)),
-								'Aplicar',
-								self.ui_manager,
-								object_id='#apply_axes_trans_z_button',
-								container=self)
-		
-		
 		# Cria o botão para resetar os valores adicionados
 		self.clear_axes_z_trans_button = UIButton(
 								c_draw.pygame.Rect(
-												(150, y),
-												(80, 25)),
+												(45, y),
+												(200, 25)),
 								'Resetar',
 								self.ui_manager,
 								object_id='#reset_axes_trans_z_clear',
+								container=self)
+						
+		y += 45
+		
+		# Cria o botão para aplicar a translação no eixo Z
+		self.apply_axes_trans_button = UIButton(
+								c_draw.pygame.Rect(
+												(45, y),
+												(200, 25)),
+								'Aplicar',
+								self.ui_manager,
+								object_id='#apply_axes_trans_z_button',
 								container=self)
 						
 	def update(self, time_delta):
 		super().update(time_delta)
 		
 	def event(self, event):
-		return True
+		if event.type == self.c_draw.pygame.USEREVENT:
+			if event.user_type == pygame_gui.UI_BUTTON_PRESSED:
+
+				if event.ui_element == self.clear_axes_x_trans_button:
+					self.x_entry_translate.set_text('0.0')
+				if event.ui_element == self.clear_axes_y_trans_button:
+					self.y_entry_translate.set_text('0.0')
+				if event.ui_element == self.clear_axes_z_trans_button:
+					self.z_entry_translate.set_text('0.0')
+					
+				if event.ui_element == self.apply_axes_trans_button:
+					self.applyTranslate()
+					
+	def applyTranslate(self):
+		t_x = float(self.x_entry_translate.get_text())
+		t_y = float(self.y_entry_translate.get_text())
+		t_z = float(self.z_entry_translate.get_text())
+		
+		self.c_update.setTranslateSelected(self.c_status.obj_selected, [t_x, t_y, t_z])
 		
 class UIRotateWindow(UIWindow):
 	def __init__(self, rect, ui_manager, c_draw, c_update, c_status, options):
@@ -484,6 +482,7 @@ class UIRotateWindow(UIWindow):
 									container=self)
 									
 		self.x_angle_entry.set_text('0.0')
+		self.x_angle_entry.disable()
 							
 							
 		y += 30
@@ -508,8 +507,6 @@ class UIRotateWindow(UIWindow):
 		self.UIListRotateX.append(self.label_minus_pi_x)
 		self.UIListRotateX.append(self.label_plus_pi_x)
 		self.UIListRotateX.append(self.x_angle_label)
-		self.UIListRotateX.append(self.x_angle_entry)
-		self.UIListRotateX.append(self.x_angle_entry)
 		self.UIListRotateX.append(self.clear_axes_x_rotate_button)
 												
 		'''
@@ -579,6 +576,7 @@ class UIRotateWindow(UIWindow):
 									container=self)
 									
 		self.y_angle_entry.set_text('0.0')
+		self.y_angle_entry.disable()
 							
 							
 		y += 30
@@ -601,8 +599,6 @@ class UIRotateWindow(UIWindow):
 		self.UIListRotateX.append(self.label_minus_pi_y)
 		self.UIListRotateX.append(self.label_plus_pi_y)
 		self.UIListRotateX.append(self.y_angle_label)
-		self.UIListRotateX.append(self.y_angle_entry)
-		self.UIListRotateX.append(self.y_angle_entry)
 		self.UIListRotateX.append(self.clear_axes_y_rotate_button)
 												
 		'''
@@ -670,8 +666,9 @@ class UIRotateWindow(UIWindow):
 									self.ui_manager,
 									object_id='#entry_z_angle',
 									container=self)
-									
+														
 		self.z_angle_entry.set_text('0.0')
+		self.z_angle_entry.disable()
 							
 							
 		y += 30
@@ -693,8 +690,6 @@ class UIRotateWindow(UIWindow):
 		self.UIListRotateX.append(self.label_minus_pi_z)
 		self.UIListRotateX.append(self.label_plus_pi_z)
 		self.UIListRotateX.append(self.z_angle_label)
-		self.UIListRotateX.append(self.z_angle_entry)
-		self.UIListRotateX.append(self.z_angle_entry)
 		self.UIListRotateX.append(self.clear_axes_z_rotate_button)
 
 		'''
@@ -722,6 +717,7 @@ class UIRotateWindow(UIWindow):
 								container=self)
 											
 		self.statusAutomaticRotate(c_status.automatic_rotate)
+		self.applyRotate()
 											
 	def update(self, time_delta):
 		super().update(time_delta)
@@ -1009,6 +1005,16 @@ class UIToolbarWindow(UIWindow):
 					for v in  self.obj_list.get_multi_selection():
 						a, b = v.replace(' ', '').split('=')
 						self.c_status.obj_selected.append(a)
+						
+					print(self.c_status.obj_selected)
+					
+			if(event.user_type == pygame_gui.UI_SELECTION_LIST_DROPPED_SELECTION):
+				if event.ui_element == self.obj_list:
+					self.c_status.obj_selected.clear()
+					for v in  self.obj_list.get_multi_selection():
+						a, b = v.replace(' ', '').split('=')
+						self.c_status.obj_selected.append(a)
+						
 					print(self.c_status.obj_selected)
 					
 			if event.user_type == pygame_gui.UI_TEXT_ENTRY_FINISHED:
@@ -1069,7 +1075,7 @@ class UIToolbarWindow(UIWindow):
 								
 	def createTranslateWindow(self):
 		return UITranslateWindow(	self.c_draw.pygame.Rect((self.options.resolution[0]  / 2 - 150,  self.options.resolution[1]  / 2 - 150), 
-								(300, 280)), 
+								(300, 320)), 
 								self.ui_manager, 
 								self.c_draw, 
 								self.c_update,
