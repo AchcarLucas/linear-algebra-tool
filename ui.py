@@ -921,8 +921,10 @@ class UIToolbarWindow(UIWindow):
 								container=self)
 		y += point_list_height + 10
 		
+		self.point_list.disable()
+		
 		# Cria a label 'Lista de Objetos'
-		self.fps_counter = UILabel(c_draw.pygame.Rect(
+		self.obj_list_label = UILabel(c_draw.pygame.Rect(
 												(45, y),
 												(130, 25)),
 							"Lista de Objetos",
@@ -944,9 +946,8 @@ class UIToolbarWindow(UIWindow):
 								self.ui_manager,
 								object_id='#select_list_obj',
 								allow_multi_select=True,
-								allow_double_clicks=True,
+								allow_double_clicks=False,
 								container=self)	
-		self.obj_list.disable()
 
 		y += obj_list_height + 10
 		
@@ -971,6 +972,8 @@ class UIToolbarWindow(UIWindow):
 								self.ui_manager,
 								object_id='#export_file',
 								container=self)
+								
+		self.updateLists()
 					
 	def update(self, time_delta):
 		super().update(time_delta)
@@ -1003,7 +1006,7 @@ class UIToolbarWindow(UIWindow):
 					
 	
 	def updateCommand(self):
-		rtn, name = self.c_draw.updateCommand(self.entry_cmd.get_text())
+		rtn, name = self.c_update.updateCommand(self.entry_cmd.get_text())
 		if rtn == global_var.RTN.ERROR_CMD:
 			self.createMessageWindow('Erro', 'O comando digitado não existe')
 		elif rtn == global_var.RTN.INVALID_CMD:
@@ -1016,24 +1019,32 @@ class UIToolbarWindow(UIWindow):
 			self.createMessageWindow('Erro [Remover Ponto]', 'O ponto está sendo usado')
 		elif rtn == global_var.RTN.CMD_FAILED:
 			self.createMessageWindow('Erro', 'Existem erros no comando digitado')
-		elif rtn == global_var.RTN.SUCCESS_POINT:
-			self.text_point_list.append((self.entry_cmd.get_text().replace(' ', ''), name))
-			self.point_list.set_item_list(self.text_point_list)
-		elif rtn == global_var.RTN.SUCCESS_VECTOR or rtn == global_var.RTN.SUCCESS_LINE:
-			self.text_obj_list.append((self.entry_cmd.get_text().replace(' ', ''), name))
-			self.obj_list.set_item_list(self.text_obj_list)
-		elif rtn == global_var.RTN.POINT_REMOVED:
-			for p in self.text_point_list:
-				if p[1] == name:
-					self.text_point_list.remove(p)
-					break
-			self.point_list.set_item_list(self.text_point_list)
-		elif rtn == global_var.RTN.LINE_REMOVED or rtn == global_var.RTN.VECTOR_REMOVED:
-			for p in self.text_obj_list:
-				if p[1] == name:
-					self.text_obj_list.remove(p)
-					break
-			self.obj_list.set_item_list(self.text_obj_list)
+		elif 	((rtn == global_var.RTN.SUCCESS_POINT) or 
+			(rtn == global_var.RTN.SUCCESS_VECTOR) or 
+			(rtn == global_var.RTN.SUCCESS_LINE) or
+			(rtn == global_var.RTN.LINE_REMOVED) or
+			(rtn == global_var.RTN.VECTOR_REMOVED) or
+			(rtn == global_var.RTN.POINT_REMOVED)):
+			self.updateLists()
+		
+			
+	def updateLists(self):
+		self.text_obj_list.clear()
+		for p in self.c_draw.point_list:
+			self.text_obj_list.append((f'{p[1].name} = P({p[1].getOriginalScreenX():0.1f}, {p[1].getOriginalScreenY():0.1f}, {p[1].getOriginalScreenZ():0.1f})', p[1].name))
+		
+		self.point_list.set_item_list(self.text_obj_list)
+		
+		self.text_obj_list.clear()
+		for p in self.c_draw.vector_list:
+			self.text_obj_list.append((f'{p[1].name} = V({p[1].p_b.name}, {p[1].p_a.name})', p[1].name))
+		
+		for p in self.c_draw.line_list:
+			self.text_obj_list.append((f'{p[1].name} = L({p[1].p_b.name}, {p[1].p_a.name})', p[1].name))
+		
+		self.obj_list.set_item_list(self.text_obj_list)
+		
+		
 	
 	def createRotateWindow(self):
 		return UIRotateWindow(	self.c_draw.pygame.Rect((self.options.resolution[0]  / 2 - 150,  self.options.resolution[1]  / 2 - 150), 

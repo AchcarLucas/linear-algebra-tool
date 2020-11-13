@@ -4,6 +4,8 @@
 import global_var
 
 import pygame
+import pygame.freetype
+
 import draw
 import update
 import ui_status
@@ -36,10 +38,14 @@ def initGame():
 	
 	c_update.pygame = pygame
 	c_update.g_ui = g_ui
+	c_update.c_draw = c_draw
 	
 	c_draw.screen = pygame.display.set_mode((c_draw.SCREEN_WIDTH, c_draw.SCREEN_HEIGHT))
 	
 	pygame.display.set_caption("Ferramenta Visual - Álgebra Linear")
+	
+	pygame.font.init() 
+	global_var.myfont = pygame.font.SysFont('Arial', 9) 
 	
 	# Initializa Clock Update
 	
@@ -66,6 +72,7 @@ def gameLoop():
 			
 			if pygame.mouse.get_pressed()[1]:
 				global_var.cam[0] -= global_var.rel_mouse[0]
+				global_var.cam[2] -= global_var.rel_mouse[1]
 				
 			g_ui.eventUI(event)
 			

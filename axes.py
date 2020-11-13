@@ -26,37 +26,37 @@ class C_Axes:
 		
 		self.list_p = [
 				# Eixo X
-				point.C_Point(-2.5, 0.0, 0.0, visible=True, color=color_x),
-				point.C_Point(-2.0, 0.0, 0.0, visible=True, color=color_x),
-				point.C_Point(-1.5, 0.0, 0.0, visible=True, color=color_x),
-				point.C_Point(-1.0, 0.0, 0.0, visible=True, color=color_x),
-				point.C_Point(-0.5, 0.0, 0.0, visible=True, color=color_x),
-				point.C_Point(0.5, 0.0, 0.0, visible=True, color=color_x),
-				point.C_Point(1.0, 0.0, 0.0, visible=True, color=color_x),
-				point.C_Point(1.5, 0.0, 0.0, visible=True, color=color_x),
-				point.C_Point(2.0, 0.0, 0.0, visible=True, color=color_x),
+				point.C_Point(-2.5, 0.0, 0.0, visible=True, color=color_x, has_text=True, text='-2.5'),
+				point.C_Point(-2.0, 0.0, 0.0, visible=True, color=color_x, has_text=True, text='-2.0'),
+				point.C_Point(-1.5, 0.0, 0.0, visible=True, color=color_x, has_text=True, text='-1.5'),
+				point.C_Point(-1.0, 0.0, 0.0, visible=True, color=color_x, has_text=True, text='-1.0'),
+				point.C_Point(-0.5, 0.0, 0.0, visible=True, color=color_x, has_text=True, text='-0.5'),
+				point.C_Point(0.5, 0.0, 0.0, visible=True, color=color_x, has_text=True, text='0.5'),
+				point.C_Point(1.0, 0.0, 0.0, visible=True, color=color_x, has_text=True, text='1.0'),
+				point.C_Point(1.5, 0.0, 0.0, visible=True, color=color_x, has_text=True, text='1.5'),
+				point.C_Point(2.0, 0.0, 0.0, visible=True, color=color_x, has_text=True, text='2.0'),
 				
 				# Eixo Y
-				point.C_Point(0.0, -2.5, 0.0, visible=True, color=color_y),
-				point.C_Point(0.0, -2.0, 0.0, visible=True, color=color_y),
-				point.C_Point(0.0, -1.5, 0.0, visible=True, color=color_y),
-				point.C_Point(0.0, -1.0, 0.0, visible=True, color=color_y),
-				point.C_Point(0.0, -0.5, 0.0, visible=True, color=color_y),
-				point.C_Point(0.0, 0.5, 0.0, visible=True, color=color_y),
-				point.C_Point(0.0, 1.0, 0.0, visible=True, color=color_y),
-				point.C_Point(0.0, 1.5, 0.0, visible=True, color=color_y),
-				point.C_Point(0.0, 2.0, 0.0, visible=True, color=color_y),
+				point.C_Point(0.0, -2.5, 0.0, visible=True, color=color_y, has_text=True, text='-2.5'),
+				point.C_Point(0.0, -2.0, 0.0, visible=True, color=color_y, has_text=True, text='-2.0'),
+				point.C_Point(0.0, -1.5, 0.0, visible=True, color=color_y, has_text=True, text='-1.5'),
+				point.C_Point(0.0, -1.0, 0.0, visible=True, color=color_y, has_text=True, text='-1.0'),
+				point.C_Point(0.0, -0.5, 0.0, visible=True, color=color_y, has_text=True, text='-0.5'),
+				point.C_Point(0.0, 0.5, 0.0, visible=True, color=color_y, has_text=True, text='0.5'),
+				point.C_Point(0.0, 1.0, 0.0, visible=True, color=color_y, has_text=True, text='1.0'),
+				point.C_Point(0.0, 1.5, 0.0, visible=True, color=color_y, has_text=True, text='1.5'),
+				point.C_Point(0.0, 2.0, 0.0, visible=True, color=color_y, has_text=True, text='2.0'),
 				
 				# Eixo Z
-				point.C_Point(0.0, 0.0, -2.5, visible=True, color=color_z),
-				point.C_Point(0.0, 0.0, -2.0, visible=True, color=color_z),
-				point.C_Point(0.0, 0.0, -1.5, visible=True, color=color_z),
-				point.C_Point(0.0, 0.0, -1.0, visible=True, color=color_z),
-				point.C_Point(0.0, 0.0, -0.5, visible=True, color=color_z),
-				point.C_Point(0.0, 0.0, 0.5, visible=True, color=color_z),
-				point.C_Point(0.0, 0.0, 1.0, visible=True, color=color_z),
-				point.C_Point(0.0, 0.0, 1.5, visible=True, color=color_z),
-				point.C_Point(0.0, 0.0, 2.0, visible=True, color=color_z)
+				point.C_Point(0.0, 0.0, -2.5, visible=True, color=color_z, has_text=True, text='-2.5'),
+				point.C_Point(0.0, 0.0, -2.0, visible=True, color=color_z, has_text=True, text='-2.0'),
+				point.C_Point(0.0, 0.0, -1.5, visible=True, color=color_z, has_text=True, text='-1.5'),
+				point.C_Point(0.0, 0.0, -1.0, visible=True, color=color_z, has_text=True, text='-1.0'),
+				point.C_Point(0.0, 0.0, -0.5, visible=True, color=color_z, has_text=True, text='-0.5'),
+				point.C_Point(0.0, 0.0, 0.5, visible=True, color=color_z, has_text=True, text='0.5'),
+				point.C_Point(0.0, 0.0, 1.0, visible=True, color=color_z, has_text=True, text='1.0'),
+				point.C_Point(0.0, 0.0, 1.5, visible=True, color=color_z, has_text=True, text='1.5'),
+				point.C_Point(0.0, 0.0, 2.0, visible=True, color=color_z, has_text=True, text='2.0')
 		]
 	
 	def renderAxes(self, c_draw):

@@ -161,9 +161,9 @@ class C_LinearTransform:
 		'''
 		
 		# A matrix de posicionamento X, Y e Z é uma matrix de 4 linhas e 4 colunas
-		t_position_xyz = [	[1, 		0, 		0, 		-position_x], 
-						[0, 		1, 		0, 		-position_y], 
-						[0, 		0,		1, 		-position_z], 
+		t_position_xyz = [	[1, 		0, 		0, 		position_x], 
+						[0, 		1, 		0, 		position_y], 
+						[0, 		0,		1, 		position_z], 
 						[0, 		0, 		0, 		1]]
 		
 		# Faz a transformação linear
