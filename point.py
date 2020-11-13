@@ -29,9 +29,9 @@ class C_Point:
 		if self.visible:
 			MVP = matrices.C_Matrix.identity(4)
 
-			MVP = self.c_TL.rotateX(MVP, global_var.cam[0])
 			MVP = self.c_TL.rotateY(MVP, global_var.cam[1])
 			MVP = self.c_TL.rotateZ(MVP, global_var.cam[2])
+			MVP = self.c_TL.rotateX(MVP, global_var.cam[0])
 
 			P = self.c_TL.perspectiveProjection(MVP, self)
 				

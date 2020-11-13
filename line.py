@@ -37,9 +37,9 @@ class C_Line:
 		self.p_b.m_point_modify = T_P_B.m_original_point
 		
 		# Faz mover a camera
-		MVP = self.c_TL.rotateX(MVP, global_var.cam[0])
 		MVP = self.c_TL.rotateY(MVP, global_var.cam[1])
 		MVP = self.c_TL.rotateZ(MVP, global_var.cam[2])
+		MVP = self.c_TL.rotateX(MVP, global_var.cam[0])
 		
 		P_A = self.c_TL.perspectiveProjection(MVP, self.p_a)
 		P_B = self.c_TL.perspectiveProjection(MVP, self.p_b)
