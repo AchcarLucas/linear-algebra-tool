@@ -102,12 +102,15 @@ class UIScaleWindow(UIWindow):
 									
 									
 		y += 30
+		
+		button_clear_width = 165
+		button_clear_x = 82
 										
 		# Cria o botão para resetar os valores adicionados
 		self.clear_axes_x_scale_button = UIButton(
 								c_draw.pygame.Rect(
-												(45, y),
-												(200, 25)),
+												(button_clear_x, y),
+												(button_clear_width, 25)),
 								'Resetar',
 								self.ui_manager,
 								object_id='#reset_axes_scale_x_clear',
@@ -145,8 +148,8 @@ class UIScaleWindow(UIWindow):
 		# Cria o botão para resetar os valores adicionados
 		self.clear_axes_y_scale_button = UIButton(
 								c_draw.pygame.Rect(
-												(45, y),
-												(200, 25)),
+												(button_clear_x, y),
+												(button_clear_width, 25)),
 								'Resetar',
 								self.ui_manager,
 								object_id='#reset_axes_scale_y_clear',
@@ -184,19 +187,19 @@ class UIScaleWindow(UIWindow):
 		# Cria o botão para resetar os valores adicionados
 		self.clear_axes_z_scale_button = UIButton(
 								c_draw.pygame.Rect(
-												(45, y),
-												(200, 25)),
+												(button_clear_x, y),
+												(button_clear_width, 25)),
 								'Resetar',
 								self.ui_manager,
 								object_id='#reset_axes_scale_z_clear',
 								container=self)
 		
-		y += 30
+		y += 45
 		
 				# Cria o botão para aplicar a escala no eixo Z
 		self.apply_axes_scale_button = UIButton(
 								c_draw.pygame.Rect(
-												(45, y),
+												(35, y),
 												(200, 25)),
 								'Aplicar',
 								self.ui_manager,
@@ -269,13 +272,17 @@ class UITranslateWindow(UIWindow):
 									
 									
 		y += 30
+		
+		
+		button_clear_width = 165
+		button_clear_x = 82
 											
 		
 		# Cria o botão para resetar os valores adicionados
 		self.clear_axes_x_trans_button = UIButton(
 								c_draw.pygame.Rect(
-												(45, y),
-												(200, 25)),
+												(button_clear_x, y),
+												(button_clear_width, 25)),
 								'Resetar',
 								self.ui_manager,
 								object_id='#reset_axes_trans_x_clear',
@@ -312,8 +319,8 @@ class UITranslateWindow(UIWindow):
 		# Cria o botão para resetar os valores adicionados
 		self.clear_axes_y_trans_button = UIButton(
 								c_draw.pygame.Rect(
-												(45, y),
-												(200, 25)),
+												(button_clear_x, y),
+												(button_clear_width, 25)),
 								'Resetar',
 								self.ui_manager,
 								object_id='#reset_axes_trans_y_clear',
@@ -351,19 +358,19 @@ class UITranslateWindow(UIWindow):
 		# Cria o botão para resetar os valores adicionados
 		self.clear_axes_z_trans_button = UIButton(
 								c_draw.pygame.Rect(
-												(45, y),
-												(200, 25)),
+												(button_clear_x, y),
+												(button_clear_width, 25)),
 								'Resetar',
 								self.ui_manager,
 								object_id='#reset_axes_trans_z_clear',
 								container=self)
 						
-		y += 30
+		y += 45
 		
 		# Cria o botão para aplicar a translação no eixo Z
 		self.apply_axes_trans_button = UIButton(
 								c_draw.pygame.Rect(
-												(45, y),
+												(35, y),
 												(200, 25)),
 								'Aplicar',
 								self.ui_manager,
@@ -485,12 +492,14 @@ class UIRotateWindow(UIWindow):
 							
 		y += 30
 				
+		button_clear_width = 185
+		button_clear_x = 45
 		
 		# Cria o botão para resetar os valores adicionados
 		self.clear_axes_x_rotate_button = UIButton(
 								c_draw.pygame.Rect(
-												(45, y),
-												(200, 25)),
+												(button_clear_x, y),
+												(button_clear_width, 25)),
 								'Resetar',
 								self.ui_manager,
 								object_id='#reset_axes_x_rotate_clear',
@@ -583,8 +592,8 @@ class UIRotateWindow(UIWindow):
 		# Cria o botão para resetar os valores adicionados
 		self.clear_axes_y_rotate_button = UIButton(
 								c_draw.pygame.Rect(
-												(45, y),
-												(200, 25)),
+												(button_clear_x, y),
+												(button_clear_width, 25)),
 								'Resetar',
 								self.ui_manager,
 								object_id='#reset_axes_y_rotate_clear',
@@ -674,8 +683,8 @@ class UIRotateWindow(UIWindow):
 		# Cria o botão para resetar os valores adicionados
 		self.clear_axes_z_rotate_button = UIButton(
 								c_draw.pygame.Rect(
-												(45, y),
-												(200, 25)),
+												(button_clear_x, y),
+												(button_clear_width, 25)),
 								'Resetar',
 								self.ui_manager,
 								object_id='#reset_axes_z_rotate_clear',
