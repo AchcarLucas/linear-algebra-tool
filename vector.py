@@ -4,7 +4,7 @@ import pygame
 import line
 import point
 import global_var
-	
+
 arrow = pygame.image.load('img/arrow.png')
 
 class C_Vector(line.C_Line):

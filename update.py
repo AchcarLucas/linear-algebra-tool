@@ -91,8 +91,8 @@ class C_Update:
 			_cmd = 'Line'
 		elif (_cmd == 'P'):
 			_cmd = 'Point'
-		elif (_cmd == 'RV'):
-			_cmd = 'RVector'
+		elif (_cmd == 'RP'):
+			_cmd = 'RPoint'
 		elif (_cmd == 'RL'):
 			_cmd = 'RLine'
 		elif (_cmd == 'RV'):
