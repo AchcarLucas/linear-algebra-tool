@@ -2,8 +2,8 @@ from enum import Enum
 
 # Variáveis Globais
 factor=100.
-far=20. 
-near=0.1
+far=100. 
+near=0.2
 angleOfView = 90.0
 cam = [-45.0, 0.0, 135,0]
 rel_mouse = [0.0, 0.0]

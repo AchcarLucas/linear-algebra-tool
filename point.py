@@ -38,6 +38,8 @@ class C_Point:
 			color = self.color
 			if(self.has_used):
 				color = (255, 0, 0)
+			else:
+				self.m_point_modify = self.m_original_point
 				
 			c_draw.pygame.draw.circle(c_draw.screen, color, [int(P.getScreenX() + c_draw.SCREEN_WIDTH / 2),  int(P.getScreenY() + c_draw.SCREEN_HEIGHT / 2)], int(self.scale), 0)
 

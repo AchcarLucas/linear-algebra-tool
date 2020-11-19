@@ -1,3 +1,4 @@
+from copy import deepcopy
 import linear_transform as TL
 import matrices
 import global_var

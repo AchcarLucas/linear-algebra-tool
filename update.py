@@ -67,6 +67,17 @@ class C_Update:
 			for v in self.c_draw.vector_list:
 				if(s == v[0]):
 					v[1].setScale(scale)
+					
+	def resetTL(self):
+		for l in self.c_draw.line_list:
+			l[1].setRotate([0.0, 0.0, 0.0])
+			l[1].setTranslate([0.0, 0.0, 0.0])
+			l[1].setScale([1.0, 1.0, 1.0])
+					
+		for v in self.c_draw.vector_list:
+			v[1].setRotate([0.0, 0.0, 0.0])
+			v[1].setTranslate([0.0, 0.0, 0.0])
+			v[1].setScale([1.0, 1.0, 1.0])
 	
 	def updateCommand(self, text):
 		try:

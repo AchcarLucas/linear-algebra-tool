@@ -715,8 +715,7 @@ class UIRotateWindow(UIWindow):
 								container=self)
 											
 		self.statusAutomaticRotate(c_status.automatic_rotate)
-		self.applyRotate()
-											
+		
 	def update(self, time_delta):
 		super().update(time_delta)
 		
@@ -922,6 +921,9 @@ class UIToolbarWindow(UIWindow):
 		
 		self.point_list.disable()
 		
+		# Reseta os objetos selecionados se a caixa de ferramenta for criado novamente
+		self.c_status.obj_selected = []
+		
 		# Cria a label 'Lista de Objetos'
 		self.obj_list_label = UILabel(c_draw.pygame.Rect(
 												(45, y),
@@ -996,6 +998,8 @@ class UIToolbarWindow(UIWindow):
 				if event.ui_element == self.apply_button:
 					self.updateCommand()
 					self.entry_cmd.set_text('')
+				if event.ui_element == self.reset_button:
+					self.c_update.resetTL()
 					
 			if(event.user_type == pygame_gui.UI_SELECTION_LIST_NEW_SELECTION):
 				if event.ui_element == self.obj_list:
