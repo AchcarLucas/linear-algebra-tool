@@ -52,30 +52,6 @@ class C_Line:
 						(P_A.getScreenX() + c_draw.SCREEN_WIDTH / 2, P_A.getScreenY() + c_draw.SCREEN_HEIGHT / 2), 
 						(P_B.getScreenX() + c_draw.SCREEN_WIDTH / 2, P_B.getScreenY() + c_draw.SCREEN_HEIGHT / 2))
 		
-		'''
-		if(dText and self.has_text):
-			p_a_text = None
-			p_b_text = None
-			
-			if(self.a_text != None):
-				p_a_text = global_var.myfont.render(self.a_text, 0, (0, 0, 0, 0))
-			else:
-				p_a_text = global_var.myfont.render(f'{self.p_a.name} ({self.p_a.getNormalizedX():0.1f}, {self.p_a.getNormalizedY():0.1f}, {self.p_a.getScreenZ():0.1f})', 1, (0, 0, 0))
-				p_a_text = global_var.myfont.render(f'{self.p_a.name}', 1, (0, 0, 0))
-				
-			if (self.b_text != None):
-				p_b_text = global_var.myfont.render(self.b_text, 0, (0, 0, 0, 0))
-			else:
-				p_b_text = global_var.myfont.render(f'{self.p_b.name} ({self.p_b.getNormalizedX():0.1f}, {self.p_b.getNormalizedY():0.1f}, {self.p_b.getNormalizedZ():0.1f})', 1, (0, 0, 0))
-
-			if(p_a_text != None):
-				c_draw.screen.blit(p_a_text, (int(P_A.getScreenX() + c_draw.SCREEN_WIDTH / 2) + 15,  int(P_A.getScreenY() + c_draw.SCREEN_HEIGHT / 2)))
-			
-			if(p_b_text != None):
-				c_draw.screen.blit(p_b_text, (int(P_B.getScreenX() + c_draw.SCREEN_WIDTH / 2) + 8,  int(P_B.getScreenY() + c_draw.SCREEN_HEIGHT / 2)))
-			
-		'''
-		
 		return P_A, P_B
 						
 	def setRotate(self, rotate=[0.0, 0.0, 0.0]):

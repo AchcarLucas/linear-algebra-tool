@@ -31,9 +31,7 @@ class C_Vector(line.C_Line):
 			t_text = None
 			if(self.text != None):
 				t_text = global_var.myfont.render(self.text, 1, (0, 0, 0))
-			else:
-				t_text = global_var.myfont.render(f'({self.p_a.getNormalizedX():0.1f}, {self.p_a.getNormalizedY():0.1f}, {self.p_a.getNormalizedZ():0.1f})', 1, (0, 0, 0))
-			c_draw.screen.blit(t_text, (int(P_A.getScreenX() + c_draw.SCREEN_WIDTH / 2) + 8,  int(P_A.getScreenY() + c_draw.SCREEN_HEIGHT / 2)))
+				c_draw.screen.blit(t_text, (int(P_A.getScreenX() + c_draw.SCREEN_WIDTH / 2) + 8,  int(P_A.getScreenY() + c_draw.SCREEN_HEIGHT / 2)))
 		
 		# Desenha o arrow do vetor
 		self.drawArrow(c_draw, screenX, screenY, np.arctan2(v_x, v_y) + np.pi)
