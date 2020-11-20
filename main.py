@@ -39,6 +39,7 @@ def initGame():
 	c_update.pygame = pygame
 	c_update.g_ui = g_ui
 	c_update.c_draw = c_draw
+	c_update.c_status = c_status
 	
 	c_draw.screen = pygame.display.set_mode((c_draw.SCREEN_WIDTH, c_draw.SCREEN_HEIGHT))
 	

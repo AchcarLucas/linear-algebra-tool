@@ -14,9 +14,11 @@ class C_Update:
 		self.pygame = None
 		self.g_ui = None
 		self.c_draw = None
+		self.c_status = None
+		
+		self.auto_rot = [0.0, 0.0, 0.0]
 		
 		self.time_delta = 0.0
-		
 		
 	def initClock(self):
 		self.clock = self.pygame.time.Clock()
@@ -25,6 +27,14 @@ class C_Update:
 		self.time_delta = self.clock.tick(60) / 1000.0
 		
 		self.clock
+		
+		if(self.c_status.automatic_rotate):
+			self.setRotateSelected(self.c_status.obj_selected, self.auto_rot)
+			self.auto_rot[0] += 0.5
+			self.auto_rot[1] += 0.5
+			self.auto_rot[2] += 0.5
+		else:
+			self.auto_rot = [0.0, 0.0, 0.0]
 		
 		self.g_ui.fps_counter.set_text(f'FPS: {self.clock.get_fps():.2f}')
 		
@@ -78,7 +88,7 @@ class C_Update:
 			v[1].setRotate([0.0, 0.0, 0.0])
 			v[1].setTranslate([0.0, 0.0, 0.0])
 			v[1].setScale([1.0, 1.0, 1.0])
-	
+		
 	def updateCommand(self, text):
 		try:
 			text = text.replace(' ', '')

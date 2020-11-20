@@ -75,10 +75,16 @@ class C_Line:
 		return P_A, P_B
 						
 	def setRotate(self, rotate=[0.0, 0.0, 0.0]):
-		self.rotateXYZ = rotate
+		self.rotateXYZ[0] = rotate[0]
+		self.rotateXYZ[1] = rotate[1]
+		self.rotateXYZ[2] = rotate[2]
 	
 	def setTranslate(self, translate=[0.0, 0.0, 0.0]):
-		self.translateXYZ = translate
+		self.translateXYZ[0] = translate[0]
+		self.translateXYZ[1] = translate[1]
+		self.translateXYZ[2] = translate[2]
 		
 	def setScale(self, scale=[1.0, 1.0, 1.0]):
-		self.scaleXYZ = scale
+		self.scaleXYZ[0] = scale[0]
+		self.scaleXYZ[1] = scale[1]
+		self.scaleXYZ[2] = scale[2]
