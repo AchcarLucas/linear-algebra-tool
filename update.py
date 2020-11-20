@@ -30,9 +30,9 @@ class C_Update:
 		
 		if(self.c_status.automatic_rotate):
 			self.setRotateSelected(self.c_status.obj_selected, self.auto_rot)
-			self.auto_rot[0] += 0.5
-			self.auto_rot[1] += 0.5
-			self.auto_rot[2] += 0.5
+			self.auto_rot[0] += 0.5 * (global_var.random())
+			self.auto_rot[1] += 0.5 * (global_var.random())
+			self.auto_rot[2] += 0.5 * (global_var.random())
 		else:
 			self.auto_rot = [0.0, 0.0, 0.0]
 		

@@ -12,7 +12,6 @@ class C_Render:
 	def __init__(self, c_draw):
 		self.c_draw = c_draw
 		self.axes = axes.C_Axes()
-		self.test = 0
 		
 	def render(self):
 		# Desenha as linhas de guia (Axes)

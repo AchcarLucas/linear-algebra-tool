@@ -1,5 +1,10 @@
 from enum import Enum
 
+from random import seed
+from random import random
+
+seed(1)
+
 # Variáveis Globais
 factor=100.
 far=100. 

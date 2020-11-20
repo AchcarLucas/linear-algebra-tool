@@ -21,6 +21,9 @@ from pygame_gui.elements import UILabel
 from pygame_gui.elements import UIImage
 from pygame_gui.elements import UIPanel
 from pygame_gui.elements import UISelectionList
+from pygame_gui.windows import UIFileDialog
+
+from pygame_gui.core.utility import create_resource_path
 
 from pygame_gui.windows import UIMessageWindow
 
@@ -29,6 +32,58 @@ class Options:
         self.resolution = (width, height)
         self.fullscreen = False
 
+class UISaveFile(UIWindow):
+	def __init__(self, rect, ui_manager, c_draw, c_update, c_status, options):
+		super().__init__(	rect, 
+						ui_manager,
+						window_display_title='Save File',
+						object_id='#ui_message_window',
+						resizable=False)
+						
+		self.c_draw = c_draw
+		self.c_update = c_update
+		self.c_status = c_status
+		
+		self.options = Options(c_draw.SCREEN_WIDTH, c_draw.SCREEN_HEIGHT)
+		
+		y = 5
+		
+		# Label Message
+		self.label = UILabel(c_draw.pygame.Rect(
+												(80, 10),
+												(100, 20)),
+							"Save File",
+							self.ui_manager,
+							object_id='#label_message',
+							container=self)
+			
+		y += 35
+		
+		# Label Message
+		self.label = UILabel(c_draw.pygame.Rect(
+												(5, y),
+												(50, 20)),
+							"Name: ",
+							self.ui_manager,
+							object_id='#label_message',
+							container=self)
+			
+		y -= 5
+		
+		# File Entry
+		self.entry_cmd = UITextEntryLine(c_draw.pygame.Rect(
+												(55, y),
+												(180, -1)),
+									self.ui_manager,
+									object_id='#entry_file_name',
+									container=self)
+			
+	def update(self, time_delta):
+		super().update(time_delta)
+		
+	def event(self, event):
+		return True
+		
 class UIMessageWindow(UIWindow):
 	def __init__(self, rect, ui_manager, c_draw, c_update, c_status, options, title, message):
 		super().__init__(	rect, 
@@ -809,6 +864,9 @@ class UIToolbarWindow(UIWindow):
 		self.ui_rotate_window = None
 		self.ui_translate_window = None
 		self.ui_scale_window = None
+		self.file_dialog = None
+		self.save_file_dialog = None
+		self.window_message = None
 														
 		y = 5
 									
@@ -960,7 +1018,7 @@ class UIToolbarWindow(UIWindow):
 		y += obj_list_height + 10
 		
 		# Cria o botão resetar transformações lineares
-		self.load_file_point = UIButton(
+		self.import_file= UIButton(
 								c_draw.pygame.Rect(
 												(10, y),
 												(200, 25)),
@@ -972,7 +1030,7 @@ class UIToolbarWindow(UIWindow):
 		y += 30
 		
 		# Cria o botão resetar transformações lineares
-		self.load_file_point = UIButton(
+		self.export_file = UIButton(
 								c_draw.pygame.Rect(
 												(10, y),
 												(200, 25)),
@@ -980,7 +1038,7 @@ class UIToolbarWindow(UIWindow):
 								self.ui_manager,
 								object_id='#export_file',
 								container=self)
-								
+												
 		self.updateLists()
 					
 	def update(self, time_delta):
@@ -1000,15 +1058,52 @@ class UIToolbarWindow(UIWindow):
 			if event.user_type == pygame_gui.UI_BUTTON_PRESSED:
 				if event.ui_element == self.rotate_button:
 					self.ui_rotate_window = self.createRotateWindow()
+					self.rotate_button.disable()
+					self.ui_rotate_window.set_blocking(True)
 				if event.ui_element == self.translate_button:
 					self.ui_translate_window = self.createTranslateWindow()
+					self.translate_button.disable()
+					self.ui_translate_window.set_blocking(True)
 				if event.ui_element == self.scale_button:
-					self.ui_translate_window = self.createScaleWindow()
+					self.ui_scale_window = self.createScaleWindow()
+					self.scale_button.disable()
+					self.ui_scale_window.set_blocking(True)
 				if event.ui_element == self.apply_button:
 					self.updateCommand()
 					self.entry_cmd.set_text('')
 				if event.ui_element == self.reset_button:
 					self.c_update.resetTL()
+				if event.ui_element == self.import_file:
+					self.file_dialog = UIFileDialog(	self.c_draw.pygame.Rect(160, 50, 440, 500),
+											self.ui_manager,
+											window_title='Load File...',
+											initial_file_path='files/',
+											allow_existing_files_only=True)
+					self.import_file.disable()
+					self.file_dialog.set_blocking(True)
+				if event.ui_element == self.export_file:
+					self.save_file_dialog = self.createSaveFile()
+					self.export_file.disable()
+					self.save_file_dialog.set_blocking(True)
+					
+			if (event.user_type == pygame_gui.UI_WINDOW_CLOSE):
+				if(event.ui_element == self.file_dialog):
+					self.import_file.enable()
+					self.file_dialog = None
+				if(event.ui_element == self.save_file_dialog):
+					self.export_file.enable()
+					self.save_file_dialog = None
+				if(event.ui_element == self.ui_rotate_window):
+					self.rotate_button.enable()
+				if(event.ui_element == self.ui_translate_window):
+					self.translate_button.enable()
+				if(event.ui_element == self.ui_scale_window):
+					self.scale_button.enable()
+				
+			if(event.user_type == pygame_gui.UI_FILE_DIALOG_PATH_PICKED):
+				print(event.text)
+				file_path = create_resource_path(event.text)
+				print(file_path)
 					
 			if(event.user_type == pygame_gui.UI_SELECTION_LIST_NEW_SELECTION):
 				if event.ui_element == self.obj_list:
@@ -1037,17 +1132,17 @@ class UIToolbarWindow(UIWindow):
 	def updateCommand(self):
 		rtn, name = self.c_update.updateCommand(self.entry_cmd.get_text())
 		if rtn == global_var.RTN.ERROR_CMD:
-			self.createMessageWindow('Erro', 'O comando digitado não existe')
+			self.window_message = self.createMessageWindow('Erro', 'O comando digitado não existe')
 		elif rtn == global_var.RTN.INVALID_CMD:
-			self.createMessageWindow('Erro', 'O comando digitado é inválido')
+			self.window_message = self.createMessageWindow('Erro', 'O comando digitado é inválido')
 		elif rtn == global_var.RTN.POINT_DOES_EXIST:
-			self.createMessageWindow('Erro', 'Um ou mais pontos não existem')
+			self.window_message = self.createMessageWindow('Erro', 'Um ou mais pontos não existem')
 		elif rtn == global_var.RTN.NAME_ALREADY:
-			self.createMessageWindow('Erro', 'O nome utilizado já está em uso')
+			self.window_message = self.createMessageWindow('Erro', 'O nome utilizado já está em uso')
 		elif rtn == global_var.RTN.POINT_IS_USED:
-			self.createMessageWindow('Erro [Remover Ponto]', 'O ponto está sendo usado')
+			self.window_message = self.createMessageWindow('Erro [Remover Ponto]', 'O ponto está sendo usado')
 		elif rtn == global_var.RTN.CMD_FAILED:
-			self.createMessageWindow('Erro', 'Existem erros no comando digitado')
+			self.window_message = self.createMessageWindow('Erro', 'Existem erros no comando digitado')
 		elif 	((rtn == global_var.RTN.SUCCESS_POINT) or 
 			(rtn == global_var.RTN.SUCCESS_VECTOR) or 
 			(rtn == global_var.RTN.SUCCESS_LINE) or
@@ -1055,6 +1150,9 @@ class UIToolbarWindow(UIWindow):
 			(rtn == global_var.RTN.VECTOR_REMOVED) or
 			(rtn == global_var.RTN.POINT_REMOVED)):
 			self.updateLists()
+			
+		if self.window_message != None:
+			self.window_message.set_blocking(True)
 		
 			
 	def updateLists(self):
@@ -1113,6 +1211,15 @@ class UIToolbarWindow(UIWindow):
 								title,
 								message)
 								
+	def createSaveFile(self):
+		return UISaveFile(	self.c_draw.pygame.Rect((self.options.resolution[0]  / 2 - 150,  self.options.resolution[1]  / 2 - 150), 
+								(300, 135)), 
+								self.ui_manager, 
+								self.c_draw, 
+								self.c_update,
+								self.c_status,
+								self.options)
+								
 # Classe Principal da Interface de Usuário
 class GeneralUI:
 	def __init__(self, c_draw, c_update, c_status):
@@ -1159,6 +1266,8 @@ class GeneralUI:
 								'Ferramentas',
 								self.ui_manager,
 								object_id='#ui_main_bar')
+								
+		self.button_toolbar.disable()
 							
 								
 	def drawUI(self):
@@ -1174,6 +1283,12 @@ class GeneralUI:
 			if event.user_type == pygame_gui.UI_BUTTON_PRESSED:
 				if event.ui_element == self.button_toolbar:
 					self.toolbar_window = self.createToolbarWindow()
+					self.button_toolbar.disable()
+					
+			if (event.user_type == pygame_gui.UI_WINDOW_CLOSE):
+				if(event.ui_element == self.toolbar_window):
+					self.button_toolbar.enable()
+					self.toolbar_window = None
 					
 	def updateUI(self):
 		self.ui_manager.update(self.c_update.time_delta)
