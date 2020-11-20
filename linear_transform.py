@@ -187,8 +187,8 @@ class C_LinearTransform:
 			Saída (Output): Classe Point
 		'''
 		
-		r_3_3 = (-2 / (global_var.far - global_var.near))
-		r_3_4 = -(global_var.far + global_var.near) / (global_var.far - global_var.near)  
+		r_3_3 = -2.0 / (global_var.far - global_var.near)
+		r_3_4 = (global_var.far + global_var.near) / (global_var.far - global_var.near)  
 		
 		# A matrix de posicionamento X, Y e Z é uma matrix de 4 linhas e 4 colunas
 		t_projection = [		[self.S, 		0, 		0, 		0], 
@@ -200,5 +200,5 @@ class C_LinearTransform:
 		# Faz a transformação linear da projeção perspectiva
 		T_AFTER = mtc.C_Matrix.mul(mtc.C_Matrix.mul(t_projection, T_M), t_point.m_original_point)
 		
-		return point.C_Point((T_AFTER[0][0] / T_AFTER[2][0])*global_var.factor, (T_AFTER[1][0] / T_AFTER[2][0])*global_var.factor, T_AFTER[2][0])
+		return point.C_Point((T_AFTER[0][0] / T_AFTER[2][0])*global_var.factor, (T_AFTER[1][0] / T_AFTER[2][0])*global_var.factor, T_AFTER[2][0]*global_var.factor)
 		

@@ -71,7 +71,7 @@ class UISaveFile(UIWindow):
 		y -= 5
 		
 		# File Entry
-		self.entry_cmd = UITextEntryLine(c_draw.pygame.Rect(
+		self.entry_file_name = UITextEntryLine(c_draw.pygame.Rect(
 												(55, y),
 												(180, -1)),
 									self.ui_manager,
@@ -82,7 +82,11 @@ class UISaveFile(UIWindow):
 		super().update(time_delta)
 		
 	def event(self, event):
-		return True
+		if event.type == self.c_draw.pygame.USEREVENT:
+			if event.user_type == pygame_gui.UI_TEXT_ENTRY_FINISHED:
+				if event.ui_element == self.entry_file_name:
+					self.c_update.saveData(event.text)
+					self.kill()
 		
 class UIMessageWindow(UIWindow):
 	def __init__(self, rect, ui_manager, c_draw, c_update, c_status, options, title, message):
@@ -976,8 +980,8 @@ class UIToolbarWindow(UIWindow):
 		# Cria a lista contendo todos os pontos
 		self.point_list = UISelectionList(
 								c_draw.pygame.Rect(
-												(20, y),
-												(180, point_list_height)),
+												(5, y),
+												(205, point_list_height)),
 								self.c_status.text_point_list,
 								self.ui_manager,
 								object_id='#select_list_point',
@@ -1006,8 +1010,8 @@ class UIToolbarWindow(UIWindow):
 		# Cria a lista contendo vetores e linhas denominados objetos
 		self.obj_list = UISelectionList(
 								c_draw.pygame.Rect(
-												(20, y),
-												(180, obj_list_height)),
+												(5, y),
+												(205, obj_list_height)),
 								self.c_status.text_obj_list,
 								self.ui_manager,
 								object_id='#select_list_obj',
@@ -1053,6 +1057,9 @@ class UIToolbarWindow(UIWindow):
 	
 		if(self.ui_scale_window is not None):
 			self.ui_scale_window.event(event)
+			
+		if(self.save_file_dialog is not None):
+			self.save_file_dialog.event(event)
 		
 		if event.type == self.c_draw.pygame.USEREVENT:
 			if event.user_type == pygame_gui.UI_BUTTON_PRESSED:
@@ -1101,9 +1108,11 @@ class UIToolbarWindow(UIWindow):
 					self.scale_button.enable()
 				
 			if(event.user_type == pygame_gui.UI_FILE_DIALOG_PATH_PICKED):
-				print(event.text)
 				file_path = create_resource_path(event.text)
-				print(file_path)
+				# Carrega os pontos, vetores e linhas de um arquivo externo
+				self.c_update.loadData(file_path)
+				# Depois que carregar o arquivo, atualiza a tela
+				self.updateLists()
 					
 			if(event.user_type == pygame_gui.UI_SELECTION_LIST_NEW_SELECTION):
 				if event.ui_element == self.obj_list:
@@ -1158,16 +1167,16 @@ class UIToolbarWindow(UIWindow):
 	def updateLists(self):
 		self.c_status.text_obj_list.clear()
 		for p in self.c_draw.point_list:
-			self.c_status.text_obj_list.append((f'{p[1].name} = P({p[1].getOriginalScreenX():0.1f}, {p[1].getOriginalScreenY():0.1f}, {p[1].getOriginalScreenZ():0.1f})', p[1].name))
+			self.c_status.text_obj_list.append((f'{p[1].name}=P({p[1].getOriginalScreenX():0.1f}, {p[1].getOriginalScreenY():0.1f}, {p[1].getOriginalScreenZ():0.1f})', p[1].name))
 		
 		self.point_list.set_item_list(self.c_status.text_obj_list)
 		
 		self.c_status.text_obj_list.clear()
 		for p in self.c_draw.vector_list:
-			self.c_status.text_obj_list.append((f'{p[1].name} = V({p[1].p_b.name}, {p[1].p_a.name})', p[1].name))
+			self.c_status.text_obj_list.append((f'{p[1].name}=V({p[1].p_b.name}, {p[1].p_a.name})', p[1].name))
 		
 		for p in self.c_draw.line_list:
-			self.c_status.text_obj_list.append((f'{p[1].name} = L({p[1].p_b.name}, {p[1].p_a.name})', p[1].name))
+			self.c_status.text_obj_list.append((f'{p[1].name}=L({p[1].p_b.name}, {p[1].p_a.name})', p[1].name))
 		
 		self.obj_list.set_item_list(self.c_status.text_obj_list)
 		

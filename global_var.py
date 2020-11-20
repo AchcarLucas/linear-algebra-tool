@@ -8,9 +8,9 @@ seed(1)
 # Variáveis Globais
 factor=100.
 far=100. 
-near=0.2
+near=1.0
 angleOfView = 90.0
-cam = [-45.0, 0.0, 135,0]
+cam = [45.0, 0.0, 135,0]
 rel_mouse = [0.0, 0.0]
 pos_mouse = [0.0, 0.0]
 myfont = None

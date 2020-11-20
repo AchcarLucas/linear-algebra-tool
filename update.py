@@ -40,13 +40,22 @@ class C_Update:
 		
 		self.g_ui.updateUI()
 		
-	def saveFile(self, file_name, data):
-		with open(file_name, 'wb') as output:
-			pickle.dump(data, output, pickle.HIGHEST_PROTOCOL)
+	def saveData(self, file_name):
+		'''
+			Salva as instância de ponto, linha e vetor em um arquivo
+			Args:
+				file_name: nome do arquivo a ser salvo
+		'''
+		with open('./files/' + file_name + '.alg', 'wb') as output:
+			pickle.dump([self.c_draw.point_list, self.c_draw.line_list, self.c_draw.vector_list], output, pickle.HIGHEST_PROTOCOL)
 		
-	def loadData(file_name):
+	def loadData(self, file_name):
 		with open(file_name, 'rb') as input:
-			return pickle.load(input)
+			data = pickle.load(input)
+			
+			self.c_draw.point_list 		= data[0] 
+			self.c_draw.line_list 		= data[1]
+			self.c_draw.vector_list 	= data[2]
 		
 	def setRotateSelected(self, selected, rot):
 		for s in selected:

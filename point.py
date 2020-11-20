@@ -44,13 +44,13 @@ class C_Point:
 			c_draw.pygame.draw.circle(c_draw.screen, color, [int(P.getScreenX() + c_draw.SCREEN_WIDTH / 2),  int(P.getScreenY() + c_draw.SCREEN_HEIGHT / 2)], int(self.scale), 0)
 
 			# Só exibe a posição atual do ponto se não estiver sendo usado
-			if(not self.has_used):
-				if(self.has_text and self.text != None):
-					coordenateText = global_var.myfont.render(self.text, 0, (0, 0, 0, 0))
-				else:
-					coordenateText = global_var.myfont.render(f'({self.getScreenX():0.1f}, {self.getScreenY():0.1f}, {self.getScreenZ():0.1f})', 1, (0, 0, 0))
+			#if(not self.has_used):
+			if(self.has_text and self.text != None):
+				coordenateText = global_var.myfont.render(self.text, 0, (0, 0, 0, 0))
+			else:
+				coordenateText = global_var.myfont.render(f'{self.name} ({self.getOriginalScreenX():0.1f}, {self.getOriginalScreenY():0.1f}, {self.getOriginalScreenZ():0.1f})', 1, (0, 0, 0))
 				
-				c_draw.screen.blit(coordenateText, (int(P.getScreenX() + c_draw.SCREEN_WIDTH / 2) + 8,  int(P.getScreenY() + c_draw.SCREEN_HEIGHT / 2)))
+			c_draw.screen.blit(coordenateText, (int(P.getScreenX() + c_draw.SCREEN_WIDTH / 2) + 8,  int(P.getScreenY() + c_draw.SCREEN_HEIGHT / 2)))
 			
 		# Sempre desativa essa flag, se alguém ativar, significa que o ponto está sendo utilizado
 		self.has_used = False

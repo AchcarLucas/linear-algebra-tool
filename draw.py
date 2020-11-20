@@ -23,16 +23,16 @@ class C_Draw:
 		
 		
 		self.point_list = [
-						['A', point.C_Point(1.0, 0.0, 0.0, name='A', visible=True)],
-						['O', point.C_Point(0.0, 0.0, 0.0, name='O', visible=True)],
-						['B', point.C_Point(1.0, 1.0, 0.0, name='B', visible=True)]
+						#['A', point.C_Point(1.0, 0.0, 0.0, name='A', visible=True)],
+						#['O', point.C_Point(0.0, 0.0, 0.0, name='O', visible=True)],
+						#['B', point.C_Point(1.0, 1.0, 0.0, name='B', visible=True)]
 					]
 				
 		self.vector_list = [
-						['V1', vector.C_Vector(self.point_list[0][1], self.point_list[1][1], name='V1', has_text=True)]
+						#['V1', vector.C_Vector(self.point_list[0][1], self.point_list[1][1], name='V1', has_text=True)]
 					]
 		self.line_list = [
-						['L1', line.C_Line(self.point_list[0][1], self.point_list[2][1], name='L1', has_text=True)]
+						#['L1', line.C_Line(self.point_list[0][1], self.point_list[2][1], name='L1', has_text=True)]
 					]
 		
 		
