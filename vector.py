@@ -18,7 +18,7 @@ class C_Vector(line.C_Line):
 		c_draw.screen.blit(rotated_arrow, [x - (rect_arrow[2] / 2) , y -  (rect_arrow[3] / 2)]) 
 
 	def render(self, c_draw, vText=True):
-		P_A, P_B, M_A, M_B = super().render(c_draw, False, vText)
+		P_A, P_B = super().render(c_draw, False, vText)
 		
 		screenX = P_A.getScreenX() + c_draw.SCREEN_WIDTH / 2
 		screenY = P_A.getScreenY() + c_draw.SCREEN_HEIGHT / 2
@@ -32,7 +32,7 @@ class C_Vector(line.C_Line):
 			if(self.text != None):
 				t_text = global_var.myfont.render(self.text, 1, (0, 0, 0))
 			elif(vText):
-				t_text = global_var.myfont.render(f'{self.name}({M_A[0][0] - M_B[0][0]:0.1f}, {M_A[1][0] - M_B[1][0]:0.1f}, {M_A[2][0] - M_B[2][0]:0.1f})', 1, (0, 0, 0))	
+				t_text = global_var.myfont.render(f'{self.name}({self.M_A[0][0] - self.M_B[0][0]:0.1f}, {self.M_A[1][0] - self.M_B[1][0]:0.1f}, {self.M_A[2][0] - self.M_B[2][0]:0.1f})', 1, (0, 0, 0))	
 			
 			if(t_text != None):
 				c_draw.screen.blit(t_text, (int((P_A.getScreenX() + c_draw.SCREEN_WIDTH / 2.0) + 8), int((P_A.getScreenY() + c_draw.SCREEN_HEIGHT / 2.0))))

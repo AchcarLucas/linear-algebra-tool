@@ -13,6 +13,9 @@ class C_Line:
 		self.a_text = a_text
 		self.b_text = b_text
 		
+		self.M_A = self.p_a.getOriginalCopy()
+		self.M_B = self.p_b.getOriginalCopy()
+		
 		self.translateXYZ = [0.0, 0.0, 0.0]
 		self.scaleXYZ = [1.0, 1.0, 1.0]
 		self.rotateXYZ = [0.0, 0.0, 0.0]
@@ -32,8 +35,8 @@ class C_Line:
 		
 		# Antes de aplicar a transformação de projeção, temos que saber onde esse ponto irá parar em relação 
 		# ao nosso novo sistema de coordenadas
-		M_A = mtc.C_Matrix.mul(MVP, self.p_a.m_original_point)
-		M_B = mtc.C_Matrix.mul(MVP, self.p_b.m_original_point)
+		self.M_A = mtc.C_Matrix.mul(MVP, self.p_a.m_original_point)
+		self.M_B = mtc.C_Matrix.mul(MVP, self.p_b.m_original_point)
 
 		# Faz mover a camera
 		MVP = self.c_TL.rotateY(MVP, global_var.cam[1])
@@ -58,12 +61,12 @@ class C_Line:
 			if(self.a_text != None):
 				p_a_text = global_var.myfont.render(self.a_text, 0, (0, 0, 0, 0))
 			elif(vText):
-				p_a_text = global_var.myfont.render(f'{self.p_a.name} ({M_A[0][0]:0.1f}, {M_A[1][0]:0.1f}, {M_A[2][0]:0.1f})', 1, (0, 0, 0))
+				p_a_text = global_var.myfont.render(f'{self.p_a.name} ({self.M_A[0][0]:0.1f}, {self.M_A[1][0]:0.1f}, {self.M_A[2][0]:0.1f})', 1, (0, 0, 0))
 				
 			if (self.b_text != None):
 				p_b_text = global_var.myfont.render(self.b_text, 0, (0, 0, 0, 0))
 			elif(vText):
-				p_b_text = global_var.myfont.render(f'{self.p_b.name} ({M_B[0][0]:0.1f}, {M_B[1][0]:0.1f}, {M_B[2][0]:0.1f})', 1, (0, 0, 0))
+				p_b_text = global_var.myfont.render(f'{self.p_b.name} ({self.M_B[0][0]:0.1f}, {self.M_B[1][0]:0.1f}, {self.M_B[2][0]:0.1f})', 1, (0, 0, 0))
 
 			if(p_a_text != None):
 				c_draw.screen.blit(p_a_text, (int(P_A.getScreenX() + c_draw.SCREEN_WIDTH / 2) + 15,  int(P_A.getScreenY() + c_draw.SCREEN_HEIGHT / 2)))
@@ -71,7 +74,7 @@ class C_Line:
 			if(p_b_text != None):
 				c_draw.screen.blit(p_b_text, (int(P_B.getScreenX() + c_draw.SCREEN_WIDTH / 2) + 8,  int(P_B.getScreenY() + c_draw.SCREEN_HEIGHT / 2)))
 				
-		return P_A, P_B, M_A, M_B
+		return P_A, P_B
 						
 	def setRotate(self, rotate=[0.0, 0.0, 0.0]):
 		self.rotateXYZ[0] = rotate[0]

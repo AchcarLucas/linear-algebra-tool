@@ -7,6 +7,7 @@ import point
 import vector
 import line
 import pickle
+import numpy as np
 
 # Classe principal Update
 class C_Update:
@@ -56,7 +57,24 @@ class C_Update:
 			self.c_draw.point_list 		= data[0] 
 			self.c_draw.line_list 		= data[1]
 			self.c_draw.vector_list 	= data[2]
+			
+			self.updateTransformList()
 		
+	def updateTransformList(self):
+		self.c_status.transform_list_text.clear()
+		
+		for l in self.c_draw.line_list:
+			self.c_status.transform_list_text.append(f'{l[0]}(({l[1].M_A[0][0]:0.1f}, {l[1].M_A[1][0]:0.1f}, {l[1].M_A[2][0]:0.1f})), (({l[1].M_B[0][0]:0.1f}, {l[1].M_B[1][0]:0.1f}, {l[1].M_B[2][0]:0.1f}))')
+				
+		for v in self.c_draw.vector_list:
+			x = v[1].M_A[0][0] - v[1].M_B[0][0]
+			y = v[1].M_A[1][0] - v[1].M_B[1][0]
+			z = v[1].M_A[2][0] - v[1].M_B[2][0]
+			
+			self.c_status.transform_list_text.append(f'{v[0]}({x:0.1f}, {y:0.1f}, {z:0.1f}) N = {np.sqrt(x*x + y*y + z*z):0.001f}')
+			
+		self.c_status.transform_list.set_item_list(self.c_status.transform_list_text)
+			
 	def setRotateSelected(self, selected, rot):
 		for s in selected:
 			for l in self.c_draw.line_list:
@@ -233,5 +251,7 @@ class C_Update:
 		else:
 			print('INVALID_CMD')
 			return global_var.RTN.INVALID_CMD, 'none'
+		
+		self.updateTransformList()
 		
 		return rtn, _name

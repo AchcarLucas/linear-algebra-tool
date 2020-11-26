@@ -88,38 +88,6 @@ class UISaveFile(UIWindow):
 					self.c_update.saveData(event.text)
 					self.kill()
 	
-class UIRealTimeTransformWindow(UIWindow):
-	def __init__(self, rect, ui_manager, c_draw, c_update, c_status, options):
-		super().__init__(	rect, 
-						ui_manager,
-						window_display_title='Transformação (Real-Time)',
-						object_id='#ui_message_window',
-						resizable=False)
-						
-		self.c_draw = c_draw
-		self.c_update = c_update
-		self.c_status = c_status
-		
-		self.options = Options(c_draw.SCREEN_WIDTH, c_draw.SCREEN_HEIGHT)
-			
-		# Cria a lista contendo todos os objetos e suas transformações (real-time)
-		self.point_transform_list = UISelectionList(
-								c_draw.pygame.Rect(
-												(5, 5),
-												(rect.width - 45, rect.height - 75)),
-								self.c_status.text_point_list_transform,
-								self.ui_manager,
-								object_id='#point_transform_list',
-								allow_multi_select=False,
-								allow_double_clicks=False,
-								container=self)
-			
-	def update(self, time_delta):
-		super().update(time_delta)
-		
-	def event(self, event):
-		return True
-		
 class UIMessageWindow(UIWindow):
 	def __init__(self, rect, ui_manager, c_draw, c_update, c_status, options, title, message):
 		super().__init__(	rect, 
@@ -1290,15 +1258,6 @@ class GeneralUI:
 								self.c_update,
 								self.c_status,
 								self.options)
-	
-	def createRealTimeTransformWindow(self):
-		return UIRealTimeTransformWindow(	self.c_draw.pygame.Rect((0,  0), 
-								(400, 200)), 
-								self.ui_manager, 
-								self.c_draw, 
-								self.c_update,
-								self.c_status,
-								self.options)
 		
 	def createUI(self):
 		self.toolbar_window = self.createToolbarWindow()
@@ -1325,7 +1284,7 @@ class GeneralUI:
 													self.options.resolution[1] - 60,
 													130,
 													25),
-								'Desativar Info',
+								'Ativar Info',
 								self.ui_manager,
 								object_id='#ui_main_bar')
 								
@@ -1334,10 +1293,47 @@ class GeneralUI:
 													self.options.resolution[1] - 30,
 													230,
 													25),
-								'Transformação (Real-Time)',
+								'Transformações',
 								self.ui_manager,
 								object_id='#ui_main_bar')
+			
+		width_selected = 400
+		
+		y = 5
+
+		self.transform_label = UILabel(self.c_draw.pygame.Rect(
+												(5, y),
+												(width_selected, 25)),
+							"Transformações",
+							self.ui_manager,
+							object_id='#real_time_transform')
+							
+		y += 25
+		
+		# Cria a lista contendo todos os objetos e suas transformações
+		self.c_status.transform_list = UISelectionList(
+								self.c_draw.pygame.Rect(
+												(5, y),
+												(width_selected, 200)),
+								self.c_status.transform_list_text,
+								self.ui_manager,
+								object_id='#point_transform_list',
+								allow_multi_select=False,
+								allow_double_clicks=False)
+				
+		y += 200
+		self.button_update_transform = UIButton(
+								self.c_draw.pygame.Rect(5, y,
+													width_selected,
+													25),
+								'Atualizar',
+								self.ui_manager,
+								object_id='#ui_button_update')
 								
+		self.c_status.transform_list.hide()
+		self.transform_label.hide()
+		self.button_update_transform.hide()
+		
 		self.button_toolbar.disable()
 							
 								
@@ -1364,9 +1360,19 @@ class GeneralUI:
 						self.c_status.vText = True
 						
 				if event.ui_element == self.button_transform:
-					self.transform_window = self.createRealTimeTransformWindow()
-					
-					
+					if self.transform_label.visible:
+						self.c_status.transform_list.hide()
+						self.transform_label.hide()
+						self.button_update_transform.hide()
+					else:
+						self.c_update.updateTransformList()
+						self.c_status.transform_list.show()
+						self.transform_label.show()
+						self.button_update_transform.show()
+						
+				if event.ui_element == self.button_update_transform:
+					self.c_update.updateTransformList()
+		
 			if (event.user_type == pygame_gui.UI_WINDOW_CLOSE):
 				if(event.ui_element == self.toolbar_window):
 					self.button_toolbar.enable()
