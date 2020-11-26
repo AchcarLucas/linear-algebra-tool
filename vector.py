@@ -9,6 +9,13 @@ arrow = pygame.image.load('img/arrow.png')
 
 class C_Vector(line.C_Line):
 	def __init__(self, p_a, p_b, color=(0, 0, 0), name='none', has_text=False, text=None):
+		'''
+			Função construct (Inicia todas as variáveis necessárias para a utilização da classe C_Vector)
+			Args:
+				None
+			Return:
+				None
+		'''
 		super().__init__(p_a, p_b, color, name, has_text)
 		self.text = text
 		

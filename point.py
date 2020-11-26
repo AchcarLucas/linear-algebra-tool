@@ -3,7 +3,14 @@ import linear_transform as TL
 import global_var
 
 class C_Point:
-	def __init__(self, x=0, y=0, z=0, color=(0, 0, 0), name='none', visible=False, scale=4.0, has_text=False, text=None):		
+	def __init__(self, x=0, y=0, z=0, color=(0, 0, 0), name='none', visible=False, scale=4.0, has_text=False, text=None):	
+		'''
+			Função construct (Inicia todas as variáveis necessárias para a utilização da classe C_Point)
+			Args:
+				None
+			Return:
+				None
+		'''		
 		# O ponto Ã© representado por uma matrix de 4 linhas e 1 coluna
 		# Ponto original (sem rotaÃ§Ã£o da camera)
 		self.m_modify_point = [[x], [y], [z], [1]]

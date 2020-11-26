@@ -29,6 +29,14 @@ c_update = update.C_Update()
 g_ui = ui.GeneralUI(c_draw, c_update, c_status)
 
 def initGame():
+	'''
+		Função responsável por inicializar as instâncias de todos os objetos que serão utilizados
+		ao logo do software
+		Args:
+			None
+		Return:
+			None
+	'''
 	pygame.init()
 	
 	# Envia as instÃ¢ncias nas classes que serÃ£o utilizadas
@@ -58,6 +66,13 @@ def initGame():
 	g_ui.createUI()
 	
 def gameLoop():
+	'''
+		Função principal que ficará em loop até o programa ser fechado
+		Args:
+			None
+		Return:
+			None
+	'''
 	running = True
 	
 	# Loop Principal
