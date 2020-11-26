@@ -10,7 +10,7 @@ from random import random
 
 seed(1)
 
-# Vari·veis Globais
+# Vari√°veis Globais
 factor=100.
 far=100. 
 near=1.0
