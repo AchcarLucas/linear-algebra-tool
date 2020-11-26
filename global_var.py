@@ -1,6 +1,6 @@
 '''
 	Módulo Global 
-	Módulo responsável por salvar todas as variáveis de status para uso de todos os outros módulos
+	Módulo responsável por salvar todas as variáveis de status para uso de todos os outros módulos sem nenhuma restrição
 '''
 
 from enum import Enum
