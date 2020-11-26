@@ -5,7 +5,7 @@ import global_var
 class C_Point:
 	def __init__(self, x=0, y=0, z=0, color=(0, 0, 0), name='none', visible=False, scale=4.0, has_text=False, text=None):	
 		'''
-			FunÁ„o construct (Inicia todas as vari·veis necess·rias para a utilizaÁ„o da classe C_Point)
+			Fun√ß√£o construct (Inicia todas as vari√°veis necess√°rias para a utiliza√ß√£o da classe C_Point)
 			Args:
 				None
 			Return:
@@ -30,7 +30,7 @@ class C_Point:
 	
 	def debugPoint(self):
 		'''
-			FunÁ„o com objetivo de depuraÁ„o dos pontos (Deprecated)
+			Fun√ß√£o com objetivo de depura√ß√£o dos pontos (Deprecated)
 			Args:
 				None
 			Return:
@@ -41,9 +41,9 @@ class C_Point:
 		
 	def render(self, c_draw):
 		'''
-			FunÁ„o respons·vel por renderizar o ponto na tela utilizando as transformaÁıes lineares
+			Fun√ß√£o respons√°vel por renderizar o ponto na tela utilizando as transforma√ß√µes lineares
 			Args:
-				None
+				c_draw: Inst√¢ncia da classe C_Draw
 			Return:
 				None
 		'''
@@ -78,7 +78,7 @@ class C_Point:
 		self.has_used = False
 		
 	'''
-		FunÁıes getters e setters
+		Fun√ß√µes getters e setters
 	'''
 	
 	def getScreenX(self):

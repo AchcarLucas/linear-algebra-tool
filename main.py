@@ -30,7 +30,7 @@ g_ui = ui.GeneralUI(c_draw, c_update, c_status)
 
 def initGame():
 	'''
-		FunÁ„o respons·vel por inicializar as inst‚ncias de todos os objetos que ser„o utilizados
+		Fun√ß√£o respons√°vel por inicializar as inst√¢ncias de todos os objetos que serem utilizados
 		ao logo do software
 		Args:
 			None
@@ -67,7 +67,7 @@ def initGame():
 	
 def gameLoop():
 	'''
-		FunÁ„o principal que ficar· em loop atÈ o programa ser fechado
+		Fun√ß√£o principal que ficar√° em loop at√© o programa ser fechado
 		Args:
 			None
 		Return:

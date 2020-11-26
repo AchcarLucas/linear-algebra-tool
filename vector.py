@@ -7,10 +7,13 @@ import global_var
 
 arrow = pygame.image.load('img/arrow.png')
 
+'''
+	Classe C_Vector possui herança da classe C_Line
+'''
 class C_Vector(line.C_Line):
 	def __init__(self, p_a, p_b, color=(0, 0, 0), name='none', has_text=False, text=None):
 		'''
-			Fun��o construct (Inicia todas as vari�veis necess�rias para a utiliza��o da classe C_Vector)
+			Função construct (Inicia todas as variáveis necessárias para a utilização da classe C_Vector)
 			Args:
 				None
 			Return:
@@ -20,11 +23,30 @@ class C_Vector(line.C_Line):
 		self.text = text
 		
 	def drawArrow(self, c_draw, x, y, angle=0.0, scale=1):
+		'''
+			Função responsável por desenhar a seta dos vetores
+			Args:
+				c_draw: Instância do C_Draw
+				x: posição x da tela
+				y: posição y da tela
+				angle: ângulo de rotação
+				scale: tamanho da seta
+			Return:
+				None
+		'''
 		rect_arrow = arrow.get_rect()
 		rotated_arrow = pygame.transform.rotate(arrow, angle * 180 / np.pi)
 		c_draw.screen.blit(rotated_arrow, [x - (rect_arrow[2] / 2) , y -  (rect_arrow[3] / 2)]) 
 
 	def render(self, c_draw, vText=True):
+		'''
+			Função responsável por renderizar o vetor
+			Args:
+				c_draw: Instância do C_Draw
+				vText: Status que indica se deve ou não exibir os textos na tela
+			Return:
+				None
+		'''
 		P_A, P_B = super().render(c_draw, False, vText)
 		
 		screenX = P_A.getScreenX() + c_draw.SCREEN_WIDTH / 2
@@ -33,7 +55,7 @@ class C_Vector(line.C_Line):
 		v_x =  P_A.getScreenX()  - P_B.getScreenX()
 		v_y =  P_A.getScreenY()  - P_B.getScreenY()
 		
-		# Exibe a posi��o atual do vetor
+		# Exibe a posição atual do vetor
 		if(self.has_text):
 			t_text = None
 			if(self.text != None):

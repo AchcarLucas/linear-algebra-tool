@@ -11,7 +11,7 @@ import global_var
 class C_Render:
 	def __init__(self, c_draw):
 		'''
-			FunÁ„o construct (Inicia todas as vari·veis necess·rias para a utilizaÁ„o da classe C_Render)
+			Fun√ß√£o construct (Inicia todas as vari√°veis necess√°rias para a utiliza√ß√£o da classe C_Render)
 			Args:
 				None
 			Return:
@@ -22,7 +22,7 @@ class C_Render:
 		
 	def render(self):
 		'''
-			FunÁ„o respons·vel por renderizar objetos fixos na tela (Por exemplo, eixos coordenados)
+			Fun√ß√£o respons√°vel por renderizar objetos fixos na tela (Por exemplo, eixos coordenados)
 			Args:
 				None
 			Return:

@@ -1,15 +1,12 @@
 '''
 	Módulo UI STATUS
-'''
-
-'''
 	Essa classe é criada globalmente e salva todos as variáveis de status da UI
 '''
 
 class UIStatus:
 	def __init__(self):
 		'''
-			Fun��o construct (Inicia todas as vari�veis necess�rias para a utiliza��o da classe UIStatus)
+			Função construct (Inicia todas as variáveis necessárias para a utilização da classe UIStatus)
 			Args:
 				None
 			Return:
