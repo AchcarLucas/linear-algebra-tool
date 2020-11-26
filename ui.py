@@ -1,5 +1,6 @@
 '''
 	Módulo User Interface
+	Módulo responável por desenhar a interface gráfica na tela
 '''
 
 import numpy as np
@@ -27,11 +28,21 @@ from pygame_gui.core.utility import create_resource_path
 
 from pygame_gui.windows import UIMessageWindow
 
+'''
+	=========================================
+	Classe Options contendo as informações de resolução da tela
+	=========================================
+'''
 class Options:
     def __init__(self, width, height):
         self.resolution = (width, height)
         self.fullscreen = False
 
+'''
+	=========================================
+	GUI responsável por dar o export dos arquivos de pontos, listas e vetores
+	=========================================
+'''
 class UISaveFile(UIWindow):
 	def __init__(self, rect, ui_manager, c_draw, c_update, c_status, options):
 		super().__init__(	rect, 
@@ -88,6 +99,11 @@ class UISaveFile(UIWindow):
 					self.c_update.saveData(event.text)
 					self.kill()
 	
+'''
+	=========================================
+	GUI responsável por gerar mensagens de erros
+	=========================================
+'''
 class UIMessageWindow(UIWindow):
 	def __init__(self, rect, ui_manager, c_draw, c_update, c_status, options, title, message):
 		super().__init__(	rect, 
@@ -118,6 +134,11 @@ class UIMessageWindow(UIWindow):
 	def event(self, event):
 		return True
 		
+'''
+	=========================================
+	GUI responsável pelo escalonamento dos vetores e linhas selecionados
+	=========================================
+'''
 class UIScaleWindow(UIWindow):
 	def __init__(self, rect, ui_manager, c_draw, c_update, c_status, options):
 		super().__init__(	rect, 
@@ -288,7 +309,12 @@ class UIScaleWindow(UIWindow):
 		t_z = float(self.z_entry_scale.get_text())
 		
 		self.c_update.setScaleSelected(self.c_status.obj_selected, [t_x, t_y, t_z])
-		
+	
+'''
+	=========================================
+	GUI responsável pela translação dos vetores e linhas selecionados
+	=========================================
+'''			
 class UITranslateWindow(UIWindow):
 	def __init__(self, rect, ui_manager, c_draw, c_update, c_status, options):
 		super().__init__(	rect, 
@@ -460,6 +486,11 @@ class UITranslateWindow(UIWindow):
 		
 		self.c_update.setTranslateSelected(self.c_status.obj_selected, [t_x, t_y, t_z])
 		
+'''
+	=========================================
+	GUI responsável pela rotação dos vetores e linhas selecionados
+	=========================================
+'''
 class UIRotateWindow(UIWindow):
 	def __init__(self, rect, ui_manager, c_draw, c_update, c_status, options):
 		super().__init__(	rect, 
@@ -851,6 +882,12 @@ class UIRotateWindow(UIWindow):
 				
 		self.c_status.automatic_rotate = status
 	
+'''
+	=========================================
+	GUI responsável pelas ferramentas (Essa classe tem como filhas as classes
+	UIRotateWindow, UIScaleWindow e UITranslateWindow)
+	=========================================
+'''
 class UIToolbarWindow(UIWindow):
 	def __init__(self, rect, ui_manager, c_draw, c_update, c_status, options):
 		super().__init__(	rect, 
@@ -1229,7 +1266,12 @@ class UIToolbarWindow(UIWindow):
 								self.c_status,
 								self.options)
 								
-# Classe Principal da Interface de Usuário
+'''
+	=========================================
+	GUI responsável pela interface global (Botão Ferramentas, Transformações 
+	e Desabilitar/Habilitar Info), a classe tem como filha todas as classes GUI
+	=========================================
+'''
 class GeneralUI:
 	def __init__(self, c_draw, c_update, c_status):
 		self.c_draw = c_draw
