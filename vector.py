@@ -17,8 +17,8 @@ class C_Vector(line.C_Line):
 		rotated_arrow = pygame.transform.rotate(arrow, angle * 180 / np.pi)
 		c_draw.screen.blit(rotated_arrow, [x - (rect_arrow[2] / 2) , y -  (rect_arrow[3] / 2)]) 
 
-	def render(self, c_draw):
-		P_A, P_B = super().render(c_draw, False)
+	def render(self, c_draw, vText=True):
+		P_A, P_B, M_A, M_B = super().render(c_draw, False, vText)
 		
 		screenX = P_A.getScreenX() + c_draw.SCREEN_WIDTH / 2
 		screenY = P_A.getScreenY() + c_draw.SCREEN_HEIGHT / 2
@@ -31,7 +31,11 @@ class C_Vector(line.C_Line):
 			t_text = None
 			if(self.text != None):
 				t_text = global_var.myfont.render(self.text, 1, (0, 0, 0))
-				c_draw.screen.blit(t_text, (int(P_A.getScreenX() + c_draw.SCREEN_WIDTH / 2) + 8,  int(P_A.getScreenY() + c_draw.SCREEN_HEIGHT / 2)))
-		
+			elif(vText):
+				t_text = global_var.myfont.render(f'{self.name}({M_A[0][0] - M_B[0][0]:0.1f}, {M_A[1][0] - M_B[1][0]:0.1f}, {M_A[2][0] - M_B[2][0]:0.1f})', 1, (0, 0, 0))	
+			
+			if(t_text != None):
+				c_draw.screen.blit(t_text, (int((P_A.getScreenX() + c_draw.SCREEN_WIDTH / 2.0) + 8), int((P_A.getScreenY() + c_draw.SCREEN_HEIGHT / 2.0))))
+			
 		# Desenha o arrow do vetor
 		self.drawArrow(c_draw, screenX, screenY, np.arctan2(v_x, v_y) + np.pi)

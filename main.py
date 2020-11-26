@@ -35,6 +35,7 @@ def initGame():
 	
 	c_draw.pygame = pygame
 	c_draw.g_ui = g_ui
+	c_draw.c_status = c_status
 	
 	c_update.pygame = pygame
 	c_update.g_ui = g_ui

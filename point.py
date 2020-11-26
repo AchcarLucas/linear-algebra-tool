@@ -6,9 +6,9 @@ class C_Point:
 	def __init__(self, x=0, y=0, z=0, color=(0, 0, 0), name='none', visible=False, scale=4.0, has_text=False, text=None):		
 		# O ponto é representado por uma matrix de 4 linhas e 1 coluna
 		# Ponto original (sem rotação da camera)
-		self.m_point_modify = [[x], [y], [z], [1]]
+		self.m_modify_point = [[x], [y], [z], [1]]
 		# Ponto original sem transformação
-		self.m_original_point = self.m_point_modify.copy()
+		self.m_original_point = self.m_modify_point.copy()
 		self.name = name
 		self.visible = visible
 		self.color = color
@@ -36,6 +36,7 @@ class C_Point:
 			P = self.c_TL.perspectiveProjection(MVP, self)
 				
 			color = self.color
+			
 			if(self.has_used):
 				color = (255, 0, 0)
 			else:
@@ -56,13 +57,13 @@ class C_Point:
 		self.has_used = False
 		
 	def getScreenX(self):
-		return self.m_point_modify[0][0]
+		return self.m_modify_point[0][0]
 		
 	def getScreenY(self):
-		return self.m_point_modify[1][0]
+		return self.m_modify_point[1][0]
 		
 	def getScreenZ(self):
-		return self.m_point_modify[2][0]
+		return self.m_modify_point[2][0]
 		
 	def getOriginalScreenX(self):
 		return self.m_original_point[0][0]
@@ -74,13 +75,13 @@ class C_Point:
 		return self.m_original_point[2][0]
 		
 	def setScreenX(self, x):
-		self.m_original_point[0][0] = x
+		self.m_modify_point[0][0] = x
 		
 	def setScreenY(self, y):
-		self.m_original_point[1][0] = y
+		self.m_modify_point[1][0] = y
 		
 	def setScreenZ(self, z):
-		self.m_point_modify[2][0] = z
+		self.m_modify_point[2][0] = z
 		
 	def getNormalizedX(self):
 		return self.getScreenX() / global_var.factor
@@ -91,5 +92,8 @@ class C_Point:
 	def getNormalizedZ(self):
 		return self.getScreenZ() / global_var.factor
 		
-	def getCopy(self):
-		return self.m_point_modify.copy()
+	def getOriginalCopy(self):
+		return self.m_original_point.copy()
+		
+	def getModifyCopy(self):
+		return self.m_modify_point.copy()

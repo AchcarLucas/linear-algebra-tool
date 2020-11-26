@@ -15,6 +15,7 @@ class C_Draw:
 		self.pygame = None
 		self.g_ui = None
 		self.myfont = None
+		self.c_status = None
 		
 		self. SCREEN_WIDTH = 800
 		self.SCREEN_HEIGHT = 600
@@ -45,10 +46,10 @@ class C_Draw:
 			p[1].render(self)
 			
 		for l in self.line_list:
-			l[1].render(self)
+			l[1].render(self, vText=self.c_status.vText)
 		
 		for v in self.vector_list:
-			v[1].render(self)
+			v[1].render(self, vText=self.c_status.vText)
 		
 		self.g_ui.drawUI()
 		

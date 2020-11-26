@@ -1240,6 +1240,8 @@ class GeneralUI:
 		
 		self.fps_counter = None
 		self.ui_toolbar_window = None
+		self.button_info = None
+		self.button_transform = None
 								
 	def initUI(self):
 		self.ui_manager = UIManager(	
@@ -1276,6 +1278,24 @@ class GeneralUI:
 								self.ui_manager,
 								object_id='#ui_main_bar')
 								
+		self.button_info = UIButton(
+								self.c_draw.pygame.Rect(self.options.resolution[0] - 140,
+													self.options.resolution[1] - 60,
+													130,
+													25),
+								'Desativar Info',
+								self.ui_manager,
+								object_id='#ui_main_bar')
+								
+		self.button_transform = UIButton(
+								self.c_draw.pygame.Rect(10,
+													self.options.resolution[1] - 30,
+													230,
+													25),
+								'Transformação (Real-Time)',
+								self.ui_manager,
+								object_id='#ui_main_bar')
+								
 		self.button_toolbar.disable()
 							
 								
@@ -1293,6 +1313,14 @@ class GeneralUI:
 				if event.ui_element == self.button_toolbar:
 					self.toolbar_window = self.createToolbarWindow()
 					self.button_toolbar.disable()
+				if event.ui_element == self.button_info:
+					if(self.c_status.vText):
+						self.button_info.set_text('Ativar Info')
+						self.c_status.vText = False
+					else:
+						self.button_info.set_text('Desativar Info')
+						self.c_status.vText = True
+					
 					
 			if (event.user_type == pygame_gui.UI_WINDOW_CLOSE):
 				if(event.ui_element == self.toolbar_window):
