@@ -1,3 +1,9 @@
+'''
+	Módulo Matrices
+	C_Matrix é a classe responsável pela manipulação das matrizes
+'''
+
+
 class C_Matrix:
 	'''
 		Função que multiplica duas matrizes quadradas de ordem N enviadas por parâmetros

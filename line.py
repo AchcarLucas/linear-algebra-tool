@@ -10,6 +10,19 @@ import global_var
 
 class C_Line:
 	def __init__(self, p_a, p_b, color=(0, 0, 0), name='none', has_text=False, a_text=None, b_text=None):
+		'''
+			Função construct (Inicia todas as variáveis necessárias para a utilização da classe C_Line)
+			Args:
+				p_a: Instância de C_Point para o ponto A
+				p_b: Instância de C_Point para o ponto B
+				color: Cor do ponto (Opcional)
+				name: Nome do ponto (Opcional)
+				has_text: Existe um texto adicionado manualmente? (Opcional)
+				a_text: Texto que será exibido na ponta A da linha (Opcional)
+				b_text: Texto que será exibido na ponta B da linha (Opcional)
+			Return:
+				None
+		'''
 		self.p_a = p_a
 		self.p_b = p_b
 		self.color = color
@@ -28,6 +41,16 @@ class C_Line:
 		self.c_TL = TL.C_LinearTransform()
 		
 	def render(self, c_draw, dText=True, vText=True):
+		'''
+			Função responsável por renderizar a linha
+			Args:
+				c_draw: Instância de C_Draw
+				dText: Exibe texto ?
+				vText: Exibe as informações da linha ? (Se dText estiver ativado, nenhuma informação será atualizada na tela)
+			Return:
+				P_A: Instância do C_Point (Ponto A da linha) com as transformações lineares aplicadas
+				P_B: Instância do C_Point (Ponto B da linha) com as transformações lineares aplicadas
+		'''
 		MVP = mtc.C_Matrix.identity(4)
 		
 		MVP = self.c_TL.scaleXYZ(MVP, self.scaleXYZ[0], self.scaleXYZ[1], self.scaleXYZ[2])
@@ -80,7 +103,10 @@ class C_Line:
 				c_draw.screen.blit(p_b_text, (int(P_B.getScreenX() + c_draw.SCREEN_WIDTH / 2) + 8,  int(P_B.getScreenY() + c_draw.SCREEN_HEIGHT / 2)))
 				
 		return P_A, P_B
-						
+			
+	'''
+		Funções Setting de Rotação, Translação e Escala
+	'''
 	def setRotate(self, rotate=[0.0, 0.0, 0.0]):
 		self.rotateXYZ[0] = rotate[0]
 		self.rotateXYZ[1] = rotate[1]
