@@ -29,10 +29,24 @@ class C_Point:
 		self.c_TL = TL.C_LinearTransform()
 	
 	def debugPoint(self):
+		'''
+			Função com objetivo de depuração dos pontos (Deprecated)
+			Args:
+				None
+			Return:
+				None
+		'''
 		print(f'Original Point {self.m_original_point}', end=' --- ')
 		print(f'Modify Point {self.m_point_modify}')
 		
 	def render(self, c_draw):
+		'''
+			Função responsável por renderizar o ponto na tela utilizando as transformações lineares
+			Args:
+				None
+			Return:
+				None
+		'''
 		if self.visible:
 			MVP = matrices.C_Matrix.identity(4)
 
@@ -63,6 +77,10 @@ class C_Point:
 		# Sempre desativa essa flag, se alguÃ©m ativar, significa que o ponto estÃ¡ sendo utilizado
 		self.has_used = False
 		
+	'''
+		Funções getters e setters
+	'''
+	
 	def getScreenX(self):
 		return self.m_modify_point[0][0]
 		
