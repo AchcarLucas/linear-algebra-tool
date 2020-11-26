@@ -2,11 +2,12 @@
 	Módulo Update
 '''
 
+import pickle
+
 import global_var
 import point
 import vector
 import line
-import pickle
 import numpy as np
 
 # Classe principal Update
