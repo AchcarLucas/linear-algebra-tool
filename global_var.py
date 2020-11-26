@@ -1,3 +1,8 @@
+'''
+	Módulo Global 
+	Módulo responsável por salvar todas as variáveis de status para uso de todos os outros módulos
+'''
+
 from enum import Enum
 
 from random import seed

@@ -1,3 +1,8 @@
+'''
+	Módulo Vector
+	C_Vector é a classe responsável para a manipulação de vetores na tela
+'''
+
 import numpy as np
 
 import pygame

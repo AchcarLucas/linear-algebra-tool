@@ -1,6 +1,7 @@
 '''
 	Módulo Main
 '''
+
 import global_var
 
 import pygame

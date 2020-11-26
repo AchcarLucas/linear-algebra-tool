@@ -1,3 +1,8 @@
+'''
+	Módulo C_Render
+	C_Render é a classe é criada para a renderização de objetos fixos na tela
+'''
+
 import numpy as np
 import linear_transform
 import matrices
@@ -13,7 +18,7 @@ class C_Render:
 		'''
 			Função construct (Inicia todas as variáveis necessárias para a utilização da classe C_Render)
 			Args:
-				None
+				c_draw: Instância do C_Draw
 			Return:
 				None
 		'''

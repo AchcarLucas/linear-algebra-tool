@@ -1,3 +1,8 @@
+'''
+	Módulo Linear_Transform
+	C_LinearTransform é responsável por fazer as transformações lineares de rotação, translação, escala e projeção de perspectiva
+'''
+
 # http://www.ic.uff.br/~aconci/Aula-7.pdf
 # https://pt.wikipedia.org/wiki/Matriz_de_rota%C3%A7%C3%A3o
 # Slide da professora de Álgebra Linear
@@ -11,6 +16,13 @@ import global_var
 class C_LinearTransform:
 	
 	def __init__(self):
+		'''
+			Função construct (Inicia todas as variáveis necessárias para a utilização da classe C_LinearTransform)
+			Args:
+				None
+			Return:
+				None
+		'''
 		self.S = 1. / (np.tan((global_var.angleOfView / 2.) * (np.pi / 180.)))
 	
 	def rotateX(self, T_M, angle_degree):

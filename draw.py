@@ -1,6 +1,8 @@
 '''
 	Módulo Draw 
+	C_Draw é a classe responsável por desenhar todos os objetos na tela
 '''
+
 import global_var
 
 import render
@@ -11,6 +13,13 @@ import line
 # Classe principal DRAW
 class C_Draw:
 	def __init__(self):
+		'''
+			Função construct (Inicia todas as variáveis necessárias para a utilização da classe C_Draw)
+			Args:
+				None
+			Return:
+				None
+		'''
 		self.screen = None
 		self.pygame = None
 		self.g_ui = None

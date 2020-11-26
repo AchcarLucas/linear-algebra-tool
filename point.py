@@ -1,3 +1,8 @@
+'''
+	Módulo C_Point
+	C_Point é a classe responsável para a manipulação de pontos na tela
+'''
+
 import matrices
 import linear_transform as TL
 import global_var

@@ -1,3 +1,8 @@
+'''
+	Módulo Line
+	C_Line é a classe responsável pela manipulação das linhas na tela
+'''
+
 from copy import deepcopy
 import linear_transform as TL
 import matrices as mtc

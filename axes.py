@@ -1,12 +1,31 @@
+'''
+	Módulo Axes 
+	C_Axes é a classe responsável por desenhar os eixos coordenados fixos na tela
+'''
+
 import point
 import line
 import vector
 
 class C_Axes:
 	def __init__(self):
+		'''
+			Função construct (Inicia todas as variáveis necessárias para a utilização da classe C_Axes)
+			Args:
+				None
+			Return:
+				None
+		'''
 		self.createAxes()
 		
 	def createAxes(self):
+		'''
+			Função responsável por inicializar os vetores e os pontos fixos do eixo coordenados
+			Args:
+				None
+			Return:
+				None
+		'''
 		AXES_X_A = point.C_Point(1.0, 0.0, 0.0)
 		AXES_X_B = point.C_Point(-1.0, 0.0, 0.0)
 
@@ -60,6 +79,13 @@ class C_Axes:
 		]
 	
 	def renderAxes(self, c_draw):
+		'''
+			Função responsável por renderizar os vetores e os pontos fixos dos eixos coordenados na tela 
+			Args:
+				c_draw: Instância do C_Draw
+			Return:
+				None
+		'''
 		self.V1.setScale([2.5, 2.5, 2.5])
 		self.V2.setScale([2.5, 2.5, 2.5])
 		self.V3.setScale([2.5, 2.5, 2.5])
