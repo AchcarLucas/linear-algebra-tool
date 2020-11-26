@@ -21,5 +21,12 @@ class C_Render:
 		self.axes = axes.C_Axes()
 		
 	def render(self):
+		'''
+			Função responsável por renderizar objetos fixos na tela (Por exemplo, eixos coordenados)
+			Args:
+				None
+			Return:
+				None
+		'''
 		# Desenha as linhas de guia (Axes)
 		self.axes.renderAxes(self.c_draw)
