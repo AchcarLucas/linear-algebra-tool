@@ -47,6 +47,13 @@ class C_Draw:
 		
 		
 	def gameDraw(self):
+		'''
+			Função responsável por chamar as funções de renderização das classes de exibição (C_Point, C_Line, C_Vector, Axes etc)
+			Args:
+				None
+			Return:
+				None
+		'''
 		self.screen.fill(self.pygame.Color('#FFFFFF'))
 		
 		self.c_render.render()
