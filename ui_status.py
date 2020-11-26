@@ -12,4 +12,5 @@ class UIStatus:
 	    self.text_point_list = []
 	    self.text_obj_list = []
 	    self.obj_selected = []
+	    self.text_point_list_transform = []
 	    self.vText = True

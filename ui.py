@@ -87,6 +87,38 @@ class UISaveFile(UIWindow):
 				if event.ui_element == self.entry_file_name:
 					self.c_update.saveData(event.text)
 					self.kill()
+	
+class UIRealTimeTransformWindow(UIWindow):
+	def __init__(self, rect, ui_manager, c_draw, c_update, c_status, options):
+		super().__init__(	rect, 
+						ui_manager,
+						window_display_title='Transformação (Real-Time)',
+						object_id='#ui_message_window',
+						resizable=False)
+						
+		self.c_draw = c_draw
+		self.c_update = c_update
+		self.c_status = c_status
+		
+		self.options = Options(c_draw.SCREEN_WIDTH, c_draw.SCREEN_HEIGHT)
+			
+		# Cria a lista contendo todos os objetos e suas transformações (real-time)
+		self.point_transform_list = UISelectionList(
+								c_draw.pygame.Rect(
+												(5, 5),
+												(rect.width - 45, rect.height - 75)),
+								self.c_status.text_point_list_transform,
+								self.ui_manager,
+								object_id='#point_transform_list',
+								allow_multi_select=False,
+								allow_double_clicks=False,
+								container=self)
+			
+	def update(self, time_delta):
+		super().update(time_delta)
+		
+	def event(self, event):
+		return True
 		
 class UIMessageWindow(UIWindow):
 	def __init__(self, rect, ui_manager, c_draw, c_update, c_status, options, title, message):
@@ -966,7 +998,7 @@ class UIToolbarWindow(UIWindow):
 		y += 30
 		
 		# Cria a label 'Lista de Pontos'
-		self.fps_counter = UILabel(c_draw.pygame.Rect(
+		self.point_list_label = UILabel(c_draw.pygame.Rect(
 												(45, y),
 												(130, 25)),
 							"Lista de Pontos",
@@ -1242,6 +1274,7 @@ class GeneralUI:
 		self.ui_toolbar_window = None
 		self.button_info = None
 		self.button_transform = None
+		self.transform_window = None
 								
 	def initUI(self):
 		self.ui_manager = UIManager(	
@@ -1252,6 +1285,15 @@ class GeneralUI:
 	def createToolbarWindow(self):
 		return UIToolbarWindow(	self.c_draw.pygame.Rect((self.options.resolution[0] - 250,  0), 
 								(250, 600)), 
+								self.ui_manager, 
+								self.c_draw, 
+								self.c_update,
+								self.c_status,
+								self.options)
+	
+	def createRealTimeTransformWindow(self):
+		return UIRealTimeTransformWindow(	self.c_draw.pygame.Rect((0,  0), 
+								(400, 200)), 
 								self.ui_manager, 
 								self.c_draw, 
 								self.c_update,
@@ -1320,6 +1362,9 @@ class GeneralUI:
 					else:
 						self.button_info.set_text('Desativar Info')
 						self.c_status.vText = True
+						
+				if event.ui_element == self.button_transform:
+					self.transform_window = self.createRealTimeTransformWindow()
 					
 					
 			if (event.user_type == pygame_gui.UI_WINDOW_CLOSE):

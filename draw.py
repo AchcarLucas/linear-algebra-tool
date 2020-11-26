@@ -17,7 +17,7 @@ class C_Draw:
 		self.myfont = None
 		self.c_status = None
 		
-		self. SCREEN_WIDTH = 800
+		self. SCREEN_WIDTH = 1024
 		self.SCREEN_HEIGHT = 600
 		
 		self.c_render = render.C_Render(self)
