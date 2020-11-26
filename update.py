@@ -12,6 +12,13 @@ import numpy as np
 # Classe principal Update
 class C_Update:
 	def __init__(self):
+		'''
+			Função construct (Inicia todas as variáveis necessárias para a utilização da classe C_Update)
+			Args:
+				None
+			Return:
+				None
+		'''
 		self.pygame = None
 		self.g_ui = None
 		self.c_draw = None
@@ -22,9 +29,24 @@ class C_Update:
 		self.time_delta = 0.0
 		
 	def initClock(self):
+		'''
+			Função chamada uma única vez ao iniciar para dar inicio a contagem do tempo 
+			para a utilização do controle de FPS
+			Args:
+				None
+			Return:
+				None
+		'''
 		self.clock = self.pygame.time.Clock()
 		
 	def gameUpdate(self):
+		'''
+			Função responsável por atualizar toda a lógica do jogo
+			Args:
+				None
+			Return:
+				None
+		'''
 		self.time_delta = self.clock.tick(60) / 1000.0
 		
 		self.clock
@@ -46,11 +68,20 @@ class C_Update:
 			Salva as instância de ponto, linha e vetor em um arquivo
 			Args:
 				file_name: nome do arquivo a ser salvo
+			Return:
+				None
 		'''
 		with open('./files/' + file_name + '.alg', 'wb') as output:
 			pickle.dump([self.c_draw.point_list, self.c_draw.line_list, self.c_draw.vector_list], output, pickle.HIGHEST_PROTOCOL)
 		
 	def loadData(self, file_name):
+		'''
+			Carrega um arquivo externo com as instâncias de pontos, vetores e linhas
+			Args:
+				file_name: nome do arquivo
+			Return:
+				None
+		'''
 		with open(file_name, 'rb') as input:
 			data = pickle.load(input)
 			
@@ -61,6 +92,13 @@ class C_Update:
 			self.updateTransformList()
 		
 	def updateTransformList(self):
+		'''
+			Função responsável por atualizar a lista de transformações da caixa de transformações
+			Args:
+				None
+			Return:
+				None
+		'''
 		self.c_status.transform_list_text.clear()
 		
 		for l in self.c_draw.line_list:
@@ -76,6 +114,14 @@ class C_Update:
 		self.c_status.transform_list.set_item_list(self.c_status.transform_list_text)
 			
 	def setRotateSelected(self, selected, rot):
+		'''
+			Função responsável por fazer o setting da rotação dos vetores ou linhas selecionados
+			Args:
+				selected: Lista contendo todos os vetores e linhas selecionados
+				scale: Tripla contendo a rotação (graus)
+			Return:
+				None
+		'''
 		for s in selected:
 			for l in self.c_draw.line_list:
 				if(s == l[0]):
@@ -86,6 +132,14 @@ class C_Update:
 					v[1].setRotate(rot)
 	
 	def setTranslateSelected(self, selected, trans):
+		'''
+			Função responsável por fazer o setting da translação dos vetores ou linhas selecionados
+			Args:
+				selected: Lista contendo todos os vetores e linhas selecionados
+				scale: Tripla contendo a translação
+			Return:
+				None
+		'''
 		for s in selected:
 			for l in self.c_draw.line_list:
 				if(s == l[0]):
@@ -96,6 +150,14 @@ class C_Update:
 					v[1].setTranslate(trans)
 					
 	def setScaleSelected(self, selected, scale):
+		'''
+			Função responsável por fazer o setting da escala dos vetores ou linhas selecionados
+			Args:
+				selected: Lista contendo todos os vetores e linhas selecionados
+				scale: Tripla contendo a escala a ser aplicado 
+			Return:
+				None
+		'''
 		for s in selected:
 			for l in self.c_draw.line_list:
 				if(s == l[0]):
@@ -106,6 +168,13 @@ class C_Update:
 					v[1].setScale(scale)
 					
 	def resetTL(self):
+		'''
+			Função responsável por resetar as transformações lineares aplicadas
+			Args:
+				None
+			Return:
+				None
+		'''
 		for l in self.c_draw.line_list:
 			l[1].setRotate([0.0, 0.0, 0.0])
 			l[1].setTranslate([0.0, 0.0, 0.0])
@@ -117,6 +186,14 @@ class C_Update:
 			v[1].setScale([1.0, 1.0, 1.0])
 		
 	def updateCommand(self, text):
+		'''
+			Função responsável por fazer a análise e execução dos comandos
+			Arg:
+				text: Comando que foi digitado
+			Return:
+				rtn: Enum RTN que contém os erros de returno
+				_name: nome do vetor, ponto ou linha que foi dado
+		'''
 		try:
 			text = text.replace(' ', '')
 			
