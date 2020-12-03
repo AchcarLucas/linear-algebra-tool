@@ -1,0 +1,106 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: module vector</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong>vector</strong></big></big></font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:c%3A%5Cusers%5Ccomputador%5Cdesktop%5Clinear-algebra-tool-main%5Clinear-algebra-tool-main%5Cvector.py">c:\users\computador\desktop\linear-algebra-tool-main\linear-algebra-tool-main\vector.py</a></font></td></tr></table>
+    <p><tt>Módulo&nbsp;Vector<br>
+<a href="#C_Vector">C_Vector</a>&nbsp;é&nbsp;a&nbsp;classe&nbsp;responsável&nbsp;para&nbsp;a&nbsp;manipulação&nbsp;de&nbsp;vetores&nbsp;na&nbsp;tela</tt></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#aa55cc">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Modules</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#aa55cc"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="global_var.html">global_var</a><br>
+<a href="line.html">line</a><br>
+</td><td width="25%" valign=top><a href="numpy.html">numpy</a><br>
+<a href="point.html">point</a><br>
+</td><td width="25%" valign=top><a href="pygame.html">pygame</a><br>
+</td><td width="25%" valign=top></td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ee77aa">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Classes</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#ee77aa"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl>
+<dt><font face="helvetica, arial"><a href="line.html#C_Line">line.C_Line</a>(<a href="builtins.html#object">builtins.object</a>)
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="vector.html#C_Vector">C_Vector</a>
+</font></dt></dl>
+</dd>
+</dl>
+ <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="C_Vector">class <strong>C_Vector</strong></a>(<a href="line.html#C_Line">line.C_Line</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt><a href="#C_Vector">C_Vector</a>(p_a,&nbsp;p_b,&nbsp;color=(0,&nbsp;0,&nbsp;0),&nbsp;name='none',&nbsp;has_text=False,&nbsp;text=None)<br>
+&nbsp;<br>
+<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="vector.html#C_Vector">C_Vector</a></dd>
+<dd><a href="line.html#C_Line">line.C_Line</a></dd>
+<dd><a href="builtins.html#object">builtins.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="C_Vector-__init__"><strong>__init__</strong></a>(self, p_a, p_b, color=(0, 0, 0), name='none', has_text=False, text=None)</dt><dd><tt>Função&nbsp;construct&nbsp;(Inicia&nbsp;todas&nbsp;as&nbsp;variáveis&nbsp;necessárias&nbsp;para&nbsp;a&nbsp;utilização&nbsp;da&nbsp;classe&nbsp;<a href="#C_Vector">C_Vector</a>)<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;None<br>
+Return:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;None</tt></dd></dl>
+
+<dl><dt><a name="C_Vector-drawArrow"><strong>drawArrow</strong></a>(self, c_draw, x, y, angle=0.0, scale=1)</dt><dd><tt>Função&nbsp;responsável&nbsp;por&nbsp;desenhar&nbsp;a&nbsp;seta&nbsp;dos&nbsp;vetores<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;c_draw:&nbsp;Instância&nbsp;do&nbsp;C_Draw<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;x:&nbsp;posição&nbsp;x&nbsp;da&nbsp;tela<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;y:&nbsp;posição&nbsp;y&nbsp;da&nbsp;tela<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;angle:&nbsp;ângulo&nbsp;de&nbsp;rotação<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;scale:&nbsp;tamanho&nbsp;da&nbsp;seta<br>
+Return:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;None</tt></dd></dl>
+
+<dl><dt><a name="C_Vector-render"><strong>render</strong></a>(self, c_draw, vText=True)</dt><dd><tt>Função&nbsp;responsável&nbsp;por&nbsp;renderizar&nbsp;o&nbsp;vetor<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;c_draw:&nbsp;Instância&nbsp;do&nbsp;C_Draw<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;vText:&nbsp;Status&nbsp;que&nbsp;indica&nbsp;se&nbsp;deve&nbsp;ou&nbsp;não&nbsp;exibir&nbsp;os&nbsp;textos&nbsp;na&nbsp;tela<br>
+Return:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;None</tt></dd></dl>
+
+<hr>
+Methods inherited from <a href="line.html#C_Line">line.C_Line</a>:<br>
+<dl><dt><a name="C_Vector-setRotate"><strong>setRotate</strong></a>(self, rotate=[0.0, 0.0, 0.0])</dt></dl>
+
+<dl><dt><a name="C_Vector-setScale"><strong>setScale</strong></a>(self, scale=[1.0, 1.0, 1.0])</dt></dl>
+
+<dl><dt><a name="C_Vector-setTranslate"><strong>setTranslate</strong></a>(self, translate=[0.0, 0.0, 0.0])</dt></dl>
+
+<hr>
+Data descriptors inherited from <a href="line.html#C_Line">line.C_Line</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#55aa55">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Data</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#55aa55"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><strong>arrow</strong> = &lt;Surface(10x10x32 SW)&gt;</td></tr></table>
+</body></html>

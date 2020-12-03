@@ -1,0 +1,87 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: module line</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong>line</strong></big></big></font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:c%3A%5Cusers%5Ccomputador%5Cdesktop%5Clinear-algebra-tool-main%5Clinear-algebra-tool-main%5Cline.py">c:\users\computador\desktop\linear-algebra-tool-main\linear-algebra-tool-main\line.py</a></font></td></tr></table>
+    <p><tt>Módulo&nbsp;Line<br>
+<a href="#C_Line">C_Line</a>&nbsp;é&nbsp;a&nbsp;classe&nbsp;responsável&nbsp;pela&nbsp;manipulação&nbsp;das&nbsp;linhas&nbsp;na&nbsp;tela</tt></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#aa55cc">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Modules</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#aa55cc"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="linear_transform.html">linear_transform</a><br>
+</td><td width="25%" valign=top><a href="global_var.html">global_var</a><br>
+</td><td width="25%" valign=top><a href="matrices.html">matrices</a><br>
+</td><td width="25%" valign=top></td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ee77aa">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Classes</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#ee77aa"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl>
+<dt><font face="helvetica, arial"><a href="builtins.html#object">builtins.object</a>
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="line.html#C_Line">C_Line</a>
+</font></dt></dl>
+</dd>
+</dl>
+ <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="C_Line">class <strong>C_Line</strong></a>(<a href="builtins.html#object">builtins.object</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt><a href="#C_Line">C_Line</a>(p_a,&nbsp;p_b,&nbsp;color=(0,&nbsp;0,&nbsp;0),&nbsp;name='none',&nbsp;has_text=False,&nbsp;a_text=None,&nbsp;b_text=None)<br>
+&nbsp;<br>
+<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="C_Line-__init__"><strong>__init__</strong></a>(self, p_a, p_b, color=(0, 0, 0), name='none', has_text=False, a_text=None, b_text=None)</dt><dd><tt>Função&nbsp;construct&nbsp;(Inicia&nbsp;todas&nbsp;as&nbsp;variáveis&nbsp;necessárias&nbsp;para&nbsp;a&nbsp;utilização&nbsp;da&nbsp;classe&nbsp;<a href="#C_Line">C_Line</a>)<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;p_a:&nbsp;Instância&nbsp;de&nbsp;C_Point&nbsp;para&nbsp;o&nbsp;ponto&nbsp;A<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;p_b:&nbsp;Instância&nbsp;de&nbsp;C_Point&nbsp;para&nbsp;o&nbsp;ponto&nbsp;B<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;color:&nbsp;Cor&nbsp;do&nbsp;ponto&nbsp;(Opcional)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;name:&nbsp;Nome&nbsp;do&nbsp;ponto&nbsp;(Opcional)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;has_text:&nbsp;Existe&nbsp;um&nbsp;texto&nbsp;adicionado&nbsp;manualmente?&nbsp;(Opcional)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;a_text:&nbsp;Texto&nbsp;que&nbsp;será&nbsp;exibido&nbsp;na&nbsp;ponta&nbsp;A&nbsp;da&nbsp;linha&nbsp;(Opcional)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;b_text:&nbsp;Texto&nbsp;que&nbsp;será&nbsp;exibido&nbsp;na&nbsp;ponta&nbsp;B&nbsp;da&nbsp;linha&nbsp;(Opcional)<br>
+Return:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;None</tt></dd></dl>
+
+<dl><dt><a name="C_Line-render"><strong>render</strong></a>(self, c_draw, dText=True, vText=True)</dt><dd><tt>Função&nbsp;responsável&nbsp;por&nbsp;renderizar&nbsp;a&nbsp;linha<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;c_draw:&nbsp;Instância&nbsp;de&nbsp;C_Draw<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;dText:&nbsp;Exibe&nbsp;texto&nbsp;?<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;vText:&nbsp;Exibe&nbsp;as&nbsp;informações&nbsp;da&nbsp;linha&nbsp;?&nbsp;(Se&nbsp;dText&nbsp;estiver&nbsp;ativado,&nbsp;nenhuma&nbsp;informação&nbsp;será&nbsp;atualizada&nbsp;na&nbsp;tela)<br>
+Return:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;P_A:&nbsp;Instância&nbsp;do&nbsp;C_Point&nbsp;(Ponto&nbsp;A&nbsp;da&nbsp;linha)&nbsp;com&nbsp;as&nbsp;transformações&nbsp;lineares&nbsp;aplicadas<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;P_B:&nbsp;Instância&nbsp;do&nbsp;C_Point&nbsp;(Ponto&nbsp;B&nbsp;da&nbsp;linha)&nbsp;com&nbsp;as&nbsp;transformações&nbsp;lineares&nbsp;aplicadas</tt></dd></dl>
+
+<dl><dt><a name="C_Line-setRotate"><strong>setRotate</strong></a>(self, rotate=[0.0, 0.0, 0.0])</dt></dl>
+
+<dl><dt><a name="C_Line-setScale"><strong>setScale</strong></a>(self, scale=[1.0, 1.0, 1.0])</dt></dl>
+
+<dl><dt><a name="C_Line-setTranslate"><strong>setTranslate</strong></a>(self, translate=[0.0, 0.0, 0.0])</dt></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td></tr></table></td></tr></table>
+</body></html>

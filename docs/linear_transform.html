@@ -1,0 +1,111 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: module linear_transform</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong>linear_transform</strong></big></big></font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:c%3A%5Cusers%5Ccomputador%5Cdesktop%5Clinear-algebra-tool-main%5Clinear-algebra-tool-main%5Clinear_transform.py">c:\users\computador\desktop\linear-algebra-tool-main\linear-algebra-tool-main\linear_transform.py</a></font></td></tr></table>
+    <p><tt>Módulo&nbsp;Linear_Transform<br>
+<a href="#C_LinearTransform">C_LinearTransform</a>&nbsp;é&nbsp;responsável&nbsp;por&nbsp;fazer&nbsp;as&nbsp;transformações&nbsp;lineares&nbsp;de&nbsp;rotação,&nbsp;translação,&nbsp;escala&nbsp;e&nbsp;projeção&nbsp;de&nbsp;perspectiva</tt></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#aa55cc">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Modules</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#aa55cc"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="global_var.html">global_var</a><br>
+</td><td width="25%" valign=top><a href="matrices.html">matrices</a><br>
+</td><td width="25%" valign=top><a href="numpy.html">numpy</a><br>
+</td><td width="25%" valign=top><a href="point.html">point</a><br>
+</td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ee77aa">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Classes</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#ee77aa"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl>
+<dt><font face="helvetica, arial"><a href="builtins.html#object">builtins.object</a>
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="linear_transform.html#C_LinearTransform">C_LinearTransform</a>
+</font></dt></dl>
+</dd>
+</dl>
+ <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="C_LinearTransform">class <strong>C_LinearTransform</strong></a>(<a href="builtins.html#object">builtins.object</a>)</font></td></tr>
+    
+<tr><td bgcolor="#ffc8d8"><tt>&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="C_LinearTransform-__init__"><strong>__init__</strong></a>(self)</dt><dd><tt>Função&nbsp;construct&nbsp;(Inicia&nbsp;todas&nbsp;as&nbsp;variáveis&nbsp;necessárias&nbsp;para&nbsp;a&nbsp;utilização&nbsp;da&nbsp;classe&nbsp;<a href="#C_LinearTransform">C_LinearTransform</a>)<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;None<br>
+Return:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;None</tt></dd></dl>
+
+<dl><dt><a name="C_LinearTransform-perspectiveProjection"><strong>perspectiveProjection</strong></a>(self, T_M, t_point)</dt><dd><tt>Matrix&nbsp;de&nbsp;projeção&nbsp;Perspectiva<br>
+T(x,&nbsp;y,&nbsp;z,&nbsp;w)&nbsp;M(4,4)&nbsp;*&nbsp;M(4,1)&nbsp;-&gt;&nbsp;R^4<br>
+&nbsp;<br>
+T_z(x,&nbsp;y,&nbsp;z,&nbsp;w)&nbsp;=&nbsp;(x,&nbsp;y,&nbsp;z,&nbsp;0)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>
+Entrada&nbsp;(Input):&nbsp;Classe&nbsp;C_Ponto&nbsp;e&nbsp;as&nbsp;posições&nbsp;x,&nbsp;y&nbsp;e&nbsp;z<br>
+Saída&nbsp;(Output):&nbsp;Classe&nbsp;Point</tt></dd></dl>
+
+<dl><dt><a name="C_LinearTransform-rotateX"><strong>rotateX</strong></a>(self, T_M, angle_degree)</dt><dd><tt>Matrix&nbsp;de&nbsp;rotação&nbsp;(Eixo&nbsp;X)<br>
+T(x,&nbsp;y,&nbsp;z,&nbsp;w)&nbsp;M(4,4)&nbsp;*&nbsp;M(4,1)&nbsp;-&gt;&nbsp;R^4<br>
+&nbsp;<br>
+T_z(x,&nbsp;y,&nbsp;z,&nbsp;w)&nbsp;=&nbsp;(x,&nbsp;y*cos(Theta)&nbsp;-&nbsp;z*sin(Theta),&nbsp;y*sin(Theta)&nbsp;+&nbsp;z*cos(Theta),&nbsp;0)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>
+Entrada&nbsp;(Input):&nbsp;Classe&nbsp;C_Ponto&nbsp;e&nbsp;o&nbsp;ângulo&nbsp;para&nbsp;transformar<br>
+Saída&nbsp;(Output):&nbsp;Classe&nbsp;Point</tt></dd></dl>
+
+<dl><dt><a name="C_LinearTransform-rotateY"><strong>rotateY</strong></a>(self, T_M, angle_degree)</dt><dd><tt>Matrix&nbsp;de&nbsp;rotação&nbsp;(Eixo&nbsp;Y)<br>
+T(x,&nbsp;y,&nbsp;z,&nbsp;w)&nbsp;M(4,3)&nbsp;*&nbsp;M(4,1)&nbsp;-&gt;&nbsp;R^4<br>
+&nbsp;<br>
+T_z(x,&nbsp;y,&nbsp;z,&nbsp;w)&nbsp;=&nbsp;(x*cos(Theta)&nbsp;-&nbsp;z*sin(Theta),&nbsp;y,&nbsp;x*sin(Theta)&nbsp;+&nbsp;z*cos(Theta),&nbsp;0)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>
+Entrada&nbsp;(Input):&nbsp;Classe&nbsp;C_Ponto&nbsp;e&nbsp;o&nbsp;ângulo&nbsp;para&nbsp;transformar<br>
+Saída&nbsp;(Output):&nbsp;Classe&nbsp;Point</tt></dd></dl>
+
+<dl><dt><a name="C_LinearTransform-rotateZ"><strong>rotateZ</strong></a>(self, T_M, angle_degree)</dt><dd><tt>Matrix&nbsp;de&nbsp;rotação&nbsp;(Eixo&nbsp;Z)<br>
+T(x,&nbsp;y,&nbsp;z,&nbsp;w)&nbsp;M(4,4)&nbsp;*&nbsp;M(4,1)&nbsp;-&gt;&nbsp;R^4<br>
+&nbsp;<br>
+T_z(x,&nbsp;y,&nbsp;z,&nbsp;w)&nbsp;=&nbsp;(x*cos(Theta)&nbsp;-&nbsp;y*sin(Theta),&nbsp;x*sin(Theta)&nbsp;+&nbsp;y*cos(Theta),&nbsp;z,&nbsp;0)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>
+Entrada&nbsp;(Input):&nbsp;Classe&nbsp;C_Ponto&nbsp;e&nbsp;o&nbsp;ângulo&nbsp;para&nbsp;transformar<br>
+Saída&nbsp;(Output):&nbsp;Classe&nbsp;Point</tt></dd></dl>
+
+<dl><dt><a name="C_LinearTransform-scaleXYZ"><strong>scaleXYZ</strong></a>(self, T_M, scale_x=1.0, scale_y=1.0, scale_z=1.0)</dt><dd><tt>Matrix&nbsp;de&nbsp;escala&nbsp;(Eixo&nbsp;XYZ)<br>
+T(x,&nbsp;y,&nbsp;z,&nbsp;w)&nbsp;M(4,4)&nbsp;*&nbsp;M(4,1)&nbsp;-&gt;&nbsp;R^4<br>
+&nbsp;<br>
+T_z(x,&nbsp;y,&nbsp;z,&nbsp;w)&nbsp;=&nbsp;(scale_x*x,&nbsp;scale_y*y,&nbsp;scale_z*z,&nbsp;0)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>
+Entrada&nbsp;(Input):&nbsp;Classe&nbsp;C_Ponto&nbsp;e&nbsp;as&nbsp;escalas&nbsp;x,&nbsp;y&nbsp;e&nbsp;z<br>
+Saída&nbsp;(Output):&nbsp;Classe&nbsp;Point</tt></dd></dl>
+
+<dl><dt><a name="C_LinearTransform-translateXYZ"><strong>translateXYZ</strong></a>(self, T_M, position_x=0.0, position_y=0.0, position_z=0.0)</dt><dd><tt>Matrix&nbsp;de&nbsp;posição&nbsp;(Eixo&nbsp;XYZ)<br>
+T(x,&nbsp;y,&nbsp;z,&nbsp;w)&nbsp;M(4,4)&nbsp;*&nbsp;M(4,1)&nbsp;-&gt;&nbsp;R^4<br>
+&nbsp;<br>
+T_z(x,&nbsp;y,&nbsp;z,&nbsp;w)&nbsp;=&nbsp;(x&nbsp;-&nbsp;position_x,&nbsp;y&nbsp;-&nbsp;position_y,&nbsp;z&nbsp;-&nbsp;position_z,&nbsp;0)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>
+Entrada&nbsp;(Input):&nbsp;Classe&nbsp;C_Ponto&nbsp;e&nbsp;as&nbsp;posições&nbsp;x,&nbsp;y&nbsp;e&nbsp;z<br>
+Saída&nbsp;(Output):&nbsp;Classe&nbsp;Point</tt></dd></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td></tr></table></td></tr></table>
+</body></html>
