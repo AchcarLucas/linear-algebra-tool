@@ -1,6 +1,8 @@
 # linear-algebra-tool
 Ferramenta para auxilio de ensino em Álgebra Linear
 
+## Documentação: [Document](https://github.com/AchcarLucas/linear-algebra-tool/blob/main/DOCUMENTA%C3%87%C3%83O.pdf)
+
 # Módulos necessários<br />
 
 ```
