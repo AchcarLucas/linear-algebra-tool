@@ -4,12 +4,12 @@ Ferramenta para auxilio de ensino em Álgebra Linear
 # Módulos necessários<br />
 
 ```
-pygame <br />
-pygame_gui <br />
-numpy <br />
-random <br />
-deepcopy <br />
-pickle <br />
+pygame
+pygame_gui
+numpy
+random
+deepcopy
+pickle
 ```
 
 
