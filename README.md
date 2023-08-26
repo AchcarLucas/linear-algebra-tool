@@ -13,7 +13,7 @@ random
 deepcopy
 pickle
 ```
-
+PS: Use o botão do scroll (pressione) e mova a tela para rotacionar
 
 ![alt preview](https://github.com/AchcarLucas/linear-algebra-tool/blob/main/img_example/preview.png?raw=true)
 ![alt preview](https://raw.githubusercontent.com/AchcarLucas/linear-algebra-tool/main/img_example/Captura%20de%20tela%20de%202023-08-26%2006-19-45.png)
