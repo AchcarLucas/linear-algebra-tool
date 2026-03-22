@@ -7,7 +7,7 @@ Ferramenta para auxilio de ensino em Álgebra Linear
 
 Requirements
 ```
-pip install -r .\requirements.txt
+python3 -m pip install -r .\requirements.txt
 ```
 
 ```
@@ -22,7 +22,7 @@ pickle
 Run
 
 ```
-python main.py
+python3 main.py
 ```
 
 PS: Use o botão do scroll, pressione (segure) para rotacionar.
