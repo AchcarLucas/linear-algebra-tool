@@ -5,6 +5,11 @@ Ferramenta para auxilio de ensino em Álgebra Linear
 
 # Módulos necessários<br />
 
+Requirements
+```
+pip install -r .\requirements.txt
+```
+
 ```
 pygame
 pygame_gui
@@ -13,6 +18,13 @@ random
 deepcopy
 pickle
 ```
+
+Run
+
+```
+python main.py
+```
+
 PS: Use o botão do scroll, pressione (segure) para rotacionar.
 
 ![alt preview](https://github.com/AchcarLucas/linear-algebra-tool/blob/main/img_example/preview.png?raw=true)
