@@ -61,7 +61,7 @@ class C_Line:
 		
 		MVP = self.c_TL.translateXYZ(MVP, self.translateXYZ[0], self.translateXYZ[1], self.translateXYZ[2])
 		
-		# Antes de aplicar a transformação de projeção, temos que saber onde esse ponto irá parar em relação 
+		# Antes de aplicar a transformaï¿½ï¿½o de projeï¿½ï¿½o, temos que saber onde esse ponto irï¿½ parar em relaï¿½ï¿½o 
 		# ao nosso novo sistema de coordenadas
 		self.M_A = mtc.C_Matrix.mul(MVP, self.p_a.m_original_point)
 		self.M_B = mtc.C_Matrix.mul(MVP, self.p_b.m_original_point)
@@ -71,7 +71,7 @@ class C_Line:
 		MVP = self.c_TL.rotateZ(MVP, global_var.cam[2])
 		MVP = self.c_TL.rotateX(MVP, global_var.cam[0])
 
-		# Aplica a projeção 3D
+		# Aplica a projeï¿½ï¿½o 3D
 		P_A = self.c_TL.perspectiveProjection(MVP, self.p_a)
 		P_B = self.c_TL.perspectiveProjection(MVP, self.p_b)
 		
